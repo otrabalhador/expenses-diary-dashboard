@@ -1,0 +1,37 @@
+@import 'variables';
+
+.-margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
+.-container {
+  box-sizing: border-box;
+  position: relative;
+  padding: 20px;
+
+  left: 5vw;
+  width: 90vw;
+
+  margin-bottom: 20px;
+
+  background-color: white;
+  @include shadow;
+
+  .-header {
+    display: flex;
+    justify-content: center;
+  }
+
+  article * {
+    padding: 10px;
+  }
+
+  blockquote {
+    font-style: italic;
+    color: grey;
+  }
+}
+
+.link:focus {
+  outline: none;
+}

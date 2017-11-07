@@ -1,0 +1,66 @@
+
+
+// Colors //
+// https://material.io/color/#!/?view.left=0&view.right=0&primary.color=4527A0&secondary.color=4FC3F7
+$primary-color: #b2ff59;
+$primary-color-light: #e7ff8c;
+$primary-color-dark: #7ecb20;
+
+$secondary-color: #ffff00;
+$secondary-color-light: #ffff5a;
+$secondary-color-dark: #c7cc00;
+
+$white: #FFFFFF;
+$black: #000000;
+$almost-black: #292929;
+$baby-blue: #dcffff;
+
+// mixins colors
+@mixin primary-color {
+  background-color: $primary-color;
+  color: $black;
+}
+
+@mixin primary-color-light {
+  background-color: $primary-color-light;
+  color: $black;
+}
+
+@mixin primary-color-dark {
+  background-color: $primary-color-dark;
+  color: $black;
+}
+
+@mixin secondary-color {
+  background-color: $secondary-color;
+  color: $black;
+}
+
+@mixin secondary-color-light {
+  background-color: $secondary-color-light;
+  color: $black;
+}
+
+@mixin secondary-color-dark {
+  background-color: $secondary-color-dark;
+  color: $black;
+}
+
+@mixin primary-color-dark-outline {
+  color: $primary-color-dark;
+  border: 1px solid $primary-color-dark;
+  background-color: white;
+  * {
+    color: $primary-color-dark;
+  }
+}
+
+
+
+
+// mixins shadow
+@mixin shadow {
+  box-shadow: 0px 4px 70px -18px #707070;
+}
+
+

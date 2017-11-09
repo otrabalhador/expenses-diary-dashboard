@@ -6,11 +6,18 @@
           <img class="-brand" src="/static/img/icons/favicon.ico"/>
         </router-link>
       </div>
+      <ul class="-left-to-right">
+        <li v-if="isLoggedIn">Hello {{username}}</li>
+      </ul>
 
       <ul class="-right-to-left">
 
-        <router-link class="link" :to="routeDetails.login.path">
+        <router-link v-if="!isLoggedIn" class="link" :to="routeDetails.login.path">
           <li :class="{ active: isActive(routeDetails.login.name)}">Login</li>
+        </router-link>
+
+        <router-link v-else :to="routeDetails.logout.path">
+          <li @click="handleLogout()">Logout</li>
         </router-link>
 
       </ul>
@@ -21,6 +28,7 @@
 
 <script>
 import routeDetails from '@/router/route_details'
+import { mapGetters } from 'vuex'
 export default {
   name: 'navbar',
   data () {
@@ -31,8 +39,13 @@ export default {
   methods: {
     isActive (name) {
       return name === this.$route.name
+    },
+    handleLogout () {
+      console.log('logouting')
+      this.$store.commit('logout')
     }
-  }
+  },
+  computed: mapGetters(['username', 'isLoggedIn'])
 }
 </script>
 

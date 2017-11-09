@@ -2,26 +2,42 @@
   <div id='login'>
     <form>
       <div class='form-group'>
-        <label for='user' class='form-label'>User</label>
-        <input id='user' class='form-input' type='text'/>
+        <label for='username' class='form-label'>Username</label>
+        <input id='username' class='form-input' type='text' v-model="credentials.username"/>
       </div>
 
       <div class='form-group'>
         <label for='password' class='form-label'>Password</label>
-        <input id='password' class='form-input' type='password'/>
+        <input id='password' class='form-input' type='password' v-model="credentials.password"/>
       </div>
 
 
-      <input type='submit' class='btn' value='Logar' @click="login()"/>
+      <button type='submit' class='btn' value='Logar' @click="handleLogin()">Logar</button>
     </form>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      credentials: {
+        username: '',
+        password: ''
+      }
+    }
+  },
   methods: {
-    login () {
-      console.log('loging in')
+    handleLogin () {
+      console.log(this.$store)
+      this.$store.dispatch('login', this.credentials)
+        .then(() => {
+          let route = '/'
+          this.$router.push(route)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }
@@ -55,13 +71,13 @@ export default {
   }
 
 
-  input.btn.active,
-  input.btn-inverse.active {
+  button.btn.active,
+  button.btn-inverse.active {
     @include primary-color-dark;
   }
 
-  input.btn { @include primary-color-dark-outline; }
-  input.btn:active { @include primary-color-dark; }
+  button.btn { @include primary-color-dark-outline; }
+  button.btn:active { @include primary-color-dark; }
 
 
   .btn-big {
@@ -91,9 +107,9 @@ export default {
 
     .form-input {
       grid-area: input;
-
-      padding-left: 10px;
-      border-radius: 10px;
+      background-color: transparent;
+      border-bottom: 2px solid black;
+      padding-left: 10px; 
       height: 2em;
     }
   }

@@ -3,15 +3,14 @@
 
     <form>
       <div class='form-group'>
-        <label for='username' class='form-label'>Username</label>
-        <input id='username' class='form-input' type='text' v-model="credentials.username"/>
+        <label for='email' class='form-label'>Email</label>
+        <input id='email' class='form-input' type='text' v-model="credentials.email"/>
       </div>
 
       <div class='form-group'>
         <label for='password' class='form-label'>Password</label>
         <input id='password' class='form-input' type='password' v-model="credentials.password"/>
       </div>
-
 
       <button type='submit' class='btn' value='Logar' @click="handleLogin()">Logar</button>
     </form>
@@ -23,14 +22,13 @@ export default {
   data () {
     return {
       credentials: {
-        username: '',
+        email: '',
         password: ''
       }
     }
   },
   methods: {
     handleLogin () {
-      console.log(this.$store)
       this.$store.dispatch('login', this.credentials)
         .then(() => {
           let route = '/'

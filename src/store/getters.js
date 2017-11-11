@@ -1,4 +1,4 @@
 export default {
   isLoggedIn: state => state.isLoggedIn,
-  username: state => state.username
+  user: state => state.user
 }

@@ -8,8 +8,6 @@
       </div>
       <ul class="-left-to-right">
         
-        <li v-if="isLoggedIn">Logged as {{user.email}}</li>
-
         <router-link v-if="isLoggedIn" class="link" :to="routeDetails.expenses.path">
           <li :class="{ active: isActive(routeDetails.expenses.name)}">Expenses</li>
         </router-link>
@@ -47,7 +45,6 @@ export default {
       return name === this.$route.name
     },
     handleLogout () {
-      console.log('logouting')
       this.$store.commit('logout')
     }
   },

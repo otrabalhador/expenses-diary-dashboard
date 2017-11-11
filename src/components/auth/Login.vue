@@ -45,7 +45,7 @@ export default {
 
 
 <style scoped lang='scss'>
-  @import '../sass/_variables.scss';
+  @import '../../sass/_variables.scss';
 
   form {
     display: flex;

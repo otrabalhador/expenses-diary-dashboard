@@ -7,5 +7,10 @@ export default {
   logout: {
     path: '/',
     name: 'Logout'
+  },
+
+  expenses: {
+    path: '/expenses',
+    name: 'Expenses'
   }
 }

@@ -7,7 +7,13 @@
         </router-link>
       </div>
       <ul class="-left-to-right">
-        <li v-if="isLoggedIn">Hello {{username}}</li>
+        
+        <li v-if="isLoggedIn">Logged as {{username}}</li>
+
+        <router-link v-if="isLoggedIn" class="link" :to="routeDetails.expenses.path">
+          <li :class="{ active: isActive(routeDetails.expenses.name)}">Expenses</li>
+        </router-link>
+
       </ul>
 
       <ul class="-right-to-left">

@@ -1,14 +1,14 @@
 export default {
 
-  login: (state, username) => {
+  login: (state, user) => {
     state.isLoggedIn = true
-    state.username = username
-    localStorage.setItem('username', username)
+    state.user = user
+    localStorage.setItem('user', user)
   },
 
   logout: (state) => {
     state.isLoggedIn = false
-    state.username = null
-    localStorage.removeItem('username')
+    state.user = null
+    localStorage.removeItem('user')
   }
 }

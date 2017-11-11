@@ -1,5 +1,6 @@
 <template>
   <div id='login'>
+
     <form>
       <div class='form-group'>
         <label for='username' class='form-label'>Username</label>
@@ -36,7 +37,13 @@ export default {
           this.$router.push(route)
         })
         .catch((err) => {
-          console.log(err)
+          this.$notify({
+            type: 'error',
+            group: 'error',
+            title: 'Authentication error',
+            text: err.message
+          })
+          this.err = err
         })
     }
   }

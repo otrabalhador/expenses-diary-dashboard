@@ -8,7 +8,7 @@
       </div>
       <ul class="-left-to-right">
         
-        <li v-if="isLoggedIn">Logged as {{username}}</li>
+        <li v-if="isLoggedIn">Logged as {{user.email}}</li>
 
         <router-link v-if="isLoggedIn" class="link" :to="routeDetails.expenses.path">
           <li :class="{ active: isActive(routeDetails.expenses.name)}">Expenses</li>
@@ -51,7 +51,7 @@ export default {
       this.$store.commit('logout')
     }
   },
-  computed: mapGetters(['username', 'isLoggedIn'])
+  computed: mapGetters(['user', 'isLoggedIn'])
 }
 </script>
 

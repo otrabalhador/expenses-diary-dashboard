@@ -1,5 +1,10 @@
 <template>
   <div id="app" class="app">
+  <notifications 
+    group="error" 
+    type="error"
+    position="top left"
+  />
     <main>
       <nav-bar></nav-bar>
       <router-view></router-view>
@@ -34,5 +39,9 @@ export default {
     border: 0;
     text-decoration: none;
 
+  }
+
+  .vue-notification {
+    font-size: 14px;
   }
 </style>

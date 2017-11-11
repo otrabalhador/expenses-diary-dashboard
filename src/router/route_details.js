@@ -1,16 +1,27 @@
-export default {
+const publicRoutes = {
   login: {
     path: '/login',
     name: 'Login'
-  },
+  }
+}
 
+const privateRoutes = {
   logout: {
     path: '/',
-    name: 'Logout'
+    name: 'Logout',
+    private: true
   },
 
   expenses: {
     path: '/expenses',
-    name: 'Expenses'
+    name: 'Expenses',
+    meta: {
+      private: true
+    }
   }
+}
+
+export default {
+  ...publicRoutes,
+  ...privateRoutes
 }

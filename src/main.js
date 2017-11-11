@@ -7,6 +7,25 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+// Redirects to login page if user is trying to access private page
+router.beforeEach((to, from, next) => {
+  if (to.meta.private && !store.getters.isLoggedIn) {
+    next({path: '/login'})
+  } else {
+    next()
+  }
+})
+
+// router.beforeEach((to, from, next) => {
+//   store.commit('setLoading', true)
+//   next()
+// })
+
+// router.afterEach((to, from) => {
+//   mediaHandler()
+//   store.commit('setLoading', false)
+// })
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import routeDetails from './route_details'
+
 import Index from '@/components/Index'
 import Login from '@/components/auth/Login'
 import Expenses from '@/components/expenses/Expenses'
@@ -19,8 +21,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/expenses',
-      name: 'Expenses',
+      ...routeDetails.expenses,
       component: Expenses
     }
   ]

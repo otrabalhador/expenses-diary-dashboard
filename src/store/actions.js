@@ -1,10 +1,13 @@
+import store from '@/store'
 import axios from 'axios'
-const AUTH_URL = 'http://localhost:5000/v1/login'
+const EXD_URL = 'http://localhost:5000/v1/'
+const EXD_AUTH_URL = EXD_URL + 'login'
+const EXD_EXPENSES_URL = EXD_URL + 'expenses'
 
 export default {
   login: (context, credentials) => {
     return new Promise((resolve, reject) => {
-      axios.post(AUTH_URL, {
+      axios.post(EXD_AUTH_URL, {
         ...credentials
       })
         .then((response) => {
@@ -17,7 +20,22 @@ export default {
           resolve()
         })
         .catch((err) => {
-          reject(err.response.data)
+          reject(err.response.data.message)
+        })
+    })
+  },
+
+  // expenses
+  fetchExpenses: (context) => {
+    return new Promise((resolve, reject) => {
+      axios.get(EXD_EXPENSES_URL, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('fetchExpenses', response.data)
+        })
+        .catch((err) => {
+          reject(err.response.data.message)
         })
     })
   }

@@ -1,9 +1,8 @@
 export default {
 
   login: (state, user) => {
-    console.log(user)
     state.isLoggedIn = true
-    state.user = user
+    state.user = user.userId
     localStorage.setItem('user', user.userId)
   },
 
@@ -11,5 +10,11 @@ export default {
     state.isLoggedIn = false
     state.user = null
     localStorage.removeItem('user')
+  },
+
+  // expenses
+  fetchExpenses: (state, expenses) => {
+    state.expenses = expenses.content
+    state.totalExpenses = expenses.total
   }
 }

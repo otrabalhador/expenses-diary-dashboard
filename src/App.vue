@@ -24,11 +24,6 @@ export default {
   @import './sass/main';
   @import './sass/_variables.scss';
 
-  /*Prevents unexpected scroll on x axis*/
-  div.app {
-    overflow: auto;
-  }
-
   body {
     background-color: $primary-color-light;
   }

@@ -39,7 +39,7 @@ export default {
             type: 'error',
             group: 'error',
             title: 'Authentication error',
-            text: err.message
+            text: err
           })
           this.err = err
         })

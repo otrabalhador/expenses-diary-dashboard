@@ -5,8 +5,10 @@ import App from './App'
 import router from './router'
 import store from './store'
 import Notifications from 'vue-notification'
+import VueGoodTable from 'vue-good-table'
 
 Vue.use(Notifications)
+Vue.use(VueGoodTable)
 
 Vue.config.productionTip = false
 

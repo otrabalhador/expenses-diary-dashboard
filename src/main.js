@@ -5,10 +5,13 @@ import App from './App'
 import router from './router'
 import store from './store'
 import Notifications from 'vue-notification'
-import VueGoodTable from 'vue-good-table'
+import 'vue-awesome/icons'
+import Icon from 'vue-awesome/components/Icon'
+import vmodal from 'vue-js-modal'
 
 Vue.use(Notifications)
-Vue.use(VueGoodTable)
+Vue.component('icon', Icon)
+Vue.use(vmodal)
 
 Vue.config.productionTip = false
 
@@ -37,5 +40,5 @@ new Vue({
   store,
   router,
   template: '<App/>',
-  components: { App }
+  components: { App, Icon }
 })

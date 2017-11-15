@@ -1,10 +1,17 @@
 <template>
   <div id="app" class="app">
+
   <notifications 
     group="error" 
     type="error"
     position="top left"
   />
+  <notifications 
+    group="info" 
+    type="info"
+    position="top left"
+  />
+
     <main>
       <nav-bar></nav-bar>
       <router-view></router-view>
@@ -40,7 +47,94 @@ export default {
   }
 
   .-wrapper {
+    width: $size-width;
+    left: $left-width;
+    position: relative;
+
     display: flex;
     justify-content: center;
+
   }
+
+  .-fixed-right {
+    position: fixed;
+    top: 50%;
+    right: 3vw;
+  }
+
+  .btn {
+    min-width: 100px;
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+
+  }
+
+  * {
+    outline: none;
+  }
+
+  button.btn.active,
+  button.btn-inverse.active {
+    @include primary-color-dark;
+  }
+
+  button.btn { @include primary-color-dark-outline; }
+  button.btn:active { @include primary-color-dark; }
+
+  button.btn.btn-red { @include red-outline; }
+  button.btn.btn-red:active { @include red; }
+
+  .btn-big {
+    min-width: 15vw;
+    padding: 10px;
+  }
+
+
+  .btn-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    padding: 8px 2px 2px 2px;
+    @include primary-color-dark;
+    @include shadow;
+  }  
+
+  .btn-icon:active { @include primary-color-dark-outline }
+
+
+  form {
+    display: grid;
+    justify-content: center;
+
+    * {
+      margin-top: 20px;
+    }
+  }
+
+  .form-group {
+
+    display: grid;
+    grid-template-areas: 'label . input';
+    grid-template-columns: 1fr 20px 3fr;
+    align-items: center;
+
+
+    .form-label {
+      grid-area: label;
+      justify-self: right;
+      font-weight: bold;
+    }
+
+    .form-input {
+      grid-area: input;
+      background-color: transparent;
+      border-bottom: 2px solid black;
+      padding-left: 10px; 
+      height: 2em;
+    }
+  }
+
+
 </style>

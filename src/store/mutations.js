@@ -18,5 +18,9 @@ export default {
   fetchExpenses: (state, expenses) => {
     Vue.set(state, 'expenses', expenses.content)
     state.totalExpenses = expenses.total
+  },
+
+  newExpense: (state, expense) => {
+    state.expenses.push(expense)
   }
 }

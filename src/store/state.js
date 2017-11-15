@@ -23,6 +23,10 @@ export default {
       field: 'category_id'
     },
     {
+      label: 'Payment Origin',
+      field: 'payment_origin_id'
+    },
+    {
       label: 'Regreted',
       field: 'regreted'
     },

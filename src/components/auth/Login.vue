@@ -50,57 +50,25 @@ export default {
 
 
 <style scoped lang='scss'>
-  @import '../../sass/_variables.scss';
+
+  // Forms
 
   form {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
 
     * {
       margin-top: 20px;
     }
   }
 
-  .btn {
-      width: 100px;
-      border: 1px solid;
-      padding: 10px;
-      border-radius: 5px;
-      margin-left: 5px;
-  }
-
-  * {
-    outline: none;
-  }
-
-
-  button.btn.active,
-  button.btn-inverse.active {
-    @include primary-color-dark;
-  }
-
-  button.btn { @include primary-color-dark-outline; }
-  button.btn:active { @include primary-color-dark; }
-
-
-  .btn-big {
-    min-width: 15vw;
-    padding: 10px;
-  }
-
-  div.single-aspect.active {
-    @include secondary-color-dark;
-  }
-
-
-
   .form-group {
 
     display: grid;
     grid-template-areas: 'label . input';
-    grid-template-columns: 1fr 20px 2fr;
+    grid-template-columns: 1fr 20px 3fr;
     align-items: center;
 
 
@@ -118,6 +86,5 @@ export default {
       height: 2em;
     }
   }
-
 
 </style>

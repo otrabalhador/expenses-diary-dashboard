@@ -38,6 +38,23 @@ export default {
           reject(err.response ? err.response.data.message : 'Server is indisponible')
         })
     })
+  },
+
+  newExpense: (context, expense) => {
+    return new Promise((resolve, reject) => {
+      axios.post(EXD_EXPENSES_URL, {
+        ...expense
+      }, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('newExpense', expense)
+          resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
   }
 
 }

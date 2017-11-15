@@ -81,7 +81,7 @@ export default {
   }
 
   .-table {
-    width: 80%;
+    width: $size-width;
 
     display: flex;
     flex-wrap: wrap;

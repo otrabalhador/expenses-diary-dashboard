@@ -4,6 +4,7 @@ import routeDetails from './route_details'
 
 import Index from '@/components/Index'
 import Login from '@/components/auth/Login'
+
 import Expenses from '@/components/expenses/Expenses'
 
 Vue.use(Router)

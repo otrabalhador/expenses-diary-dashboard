@@ -10,6 +10,7 @@ export default {
   // expenses
   // expenses: state => state.isLoggedIn,
   totalExpenses: state => state.totalExpenses,
+  columns: state => state.columns,
   expenses: state => state.expenses,
   totalExpensesAmount: state => 0
 }

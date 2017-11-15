@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export default {
 
   login: (state, user) => {
@@ -14,7 +16,7 @@ export default {
 
   // expenses
   fetchExpenses: (state, expenses) => {
-    state.expenses = expenses.content
+    Vue.set(state, 'expenses', expenses.content)
     state.totalExpenses = expenses.total
   }
 }

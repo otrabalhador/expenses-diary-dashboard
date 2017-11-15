@@ -25,7 +25,6 @@ export default {
   @import './sass/_variables.scss';
 
   body {
-    background-color: $primary-color-light;
   }
 
   * {
@@ -38,5 +37,10 @@ export default {
 
   .vue-notification {
     font-size: 14px;
+  }
+
+  .-wrapper {
+    display: flex;
+    justify-content: center;
   }
 </style>

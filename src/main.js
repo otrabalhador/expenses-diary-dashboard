@@ -11,7 +11,7 @@ import vmodal from 'vue-js-modal'
 
 Vue.use(Notifications)
 Vue.component('icon', Icon)
-Vue.use(vmodal)
+Vue.use(vmodal, { dialog: true })
 
 Vue.config.productionTip = false
 

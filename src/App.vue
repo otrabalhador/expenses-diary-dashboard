@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="app">
-
+  
+  <v-dialog/>
   <notifications 
     group="error" 
     type="error"

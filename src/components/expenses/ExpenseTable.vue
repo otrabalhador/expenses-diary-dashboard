@@ -22,7 +22,7 @@
           <icon name="edit" scale="1"></icon>
         </button>      
 
-        <button class='btn-icon-sm btn-red' @click="deleteExpense(row)">
+        <button class='btn-icon-sm btn-red' @click="confirmDeletion(row)">
           <icon name="trash" scale="1"></icon>
         </button>      
       </div>        
@@ -62,6 +62,22 @@ export default {
     },
     editExpense (expense) {
       this.$modal.show('expense-form', { expense: expense })
+    },
+    confirmDeletion (expense) {
+      this.$modal.show('dialog', {
+        title: 'Deleting expense...',
+        text: 'Are you sure you want to delete this expense?',
+        buttons: [
+          { title: 'Cancel' },
+          {
+            title: 'Yes',
+            handler: () => {
+              this.deleteExpense(expense)
+              this.$modal.hide('dialog')
+            }
+          }
+        ]
+      })
     },
     deleteExpense (expense) {
       this.$store.dispatch('deleteExpense', expense.id)

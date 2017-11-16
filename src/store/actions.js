@@ -3,6 +3,11 @@ import axios from 'axios'
 const EXD_URL = 'http://localhost:5000/v1/'
 const EXD_AUTH_URL = EXD_URL + 'login'
 const EXD_EXPENSES_URL = EXD_URL + 'expenses'
+const EXD_EXPENSE_URL = EXD_URL + 'expense/%expenseId%'
+
+function singleExpenseUrl (expenseId) {
+  return EXD_EXPENSE_URL.replace(/%expenseId%/g, expenseId)
+}
 
 export default {
   login: (context, credentials) => {
@@ -49,6 +54,31 @@ export default {
       })
         .then((response) => {
           context.commit('newExpense', expense)
+          resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  },
+
+  editExpense: (context, expense) => {
+    let expenseUrl = singleExpenseUrl(expense.id)
+
+    return new Promise((resolve, reject) => {
+      axios.patch(expenseUrl, {
+        payment_origin_id: expense.payment_origin_id,
+        category_id: expense.category_id,
+        reference_date: expense.reference_date,
+        description: expense.description,
+        amount: expense.amount,
+        regreted: expense.regreted,
+        comments: expense.comments
+      }, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('editExpense', expense)
           resolve(response.data.message)
         })
         .catch((err) => {

@@ -22,5 +22,11 @@ export default {
 
   newExpense: (state, expense) => {
     state.expenses.push(expense)
+  },
+
+  editExpense: (state, expense) => {
+    let index = state.expenses.map((el) => el.id).indexOf(expense.id)
+    state.expenses.splice(index, 1)
+    state.expenses.splice(index, 0, expense)
   }
 }

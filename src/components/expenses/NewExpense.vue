@@ -3,7 +3,9 @@
     <modal 
       name="expense-form"
       :width="400"
-      :height="500">
+      :height="500"
+      @before-open="beforeOpen"
+      >
 
       <div class='-wrapper'>
 
@@ -94,8 +96,12 @@
           Close
         </button>
         
-        <button class='btn' @click="newExpense()">
+        <button class='btn' v-if="newExpenseModal" @click="newExpense()">
           Create
+        </button>
+        
+        <button class='btn' v-else @click="editExpense()">
+          Edit
         </button>
 
       </div>
@@ -107,23 +113,9 @@
 <script>
 export default {
   name: 'new-expense',
-  props: {
-    expense: {
-      type: Object,
-      default () {
-        return {
-          reference_date: null,
-          description: null,
-          category_id: null,
-          payment_origin_id: null,
-          regreted: null,
-          amount: null
-        }
-      }
-    }
-  },
   data () {
     return {
+      expense: {},
       emptyExpense: {
         reference_date: null,
         description: null,
@@ -131,10 +123,27 @@ export default {
         payment_origin_id: null,
         regreted: null,
         amount: null
-      }
+      },
+      newExpenseModal: true
     }
   },
   methods: {
+    beforeOpen (event) {
+      if (event.params) {
+        this.newExpenseModal = false
+        if (event.params.expense) {
+          this.expense = event.params.expense
+        } else {
+          this.expense = this.emptyExpense
+          this.newExpenseModal = true
+        }
+      } else {
+        if (!this.newExpenseModal) {
+          this.newExpenseModal = true
+          this.expense = this.emptyExpense
+        }
+      }
+    },
     newExpense () {
       this.$store.dispatch('newExpense', this.expense)
         .then((message) => {
@@ -144,7 +153,27 @@ export default {
             title: 'Expense',
             text: message
           })
-          this.$modal.close('expense-form')
+          this.$modal.hide('expense-form')
+        })
+        .catch((err) => {
+          this.$notify({
+            type: 'error',
+            group: 'error',
+            title: 'Expense',
+            text: err
+          })
+        })
+    },
+    editExpense (expense) {
+      this.$store.dispatch('editExpense', this.expense)
+        .then((message) => {
+          this.$notify({
+            type: 'info',
+            group: 'info',
+            title: 'Expense',
+            text: message
+          })
+          this.$modal.hide('expense-form')
         })
         .catch((err) => {
           this.$notify({
@@ -176,5 +205,8 @@ export default {
     }
   }
 
+  .btn {
+    border-radius: 0;
+  }
 
 </style>

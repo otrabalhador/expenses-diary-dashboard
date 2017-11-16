@@ -5,7 +5,7 @@
       hello, world!
     </modal>
  -->
-    <new-expense :expense="emptyExpense"></new-expense>
+    <new-expense></new-expense>
 
     <div class="-fixed-right">
     <button class='btn-icon' @click="newExpense">

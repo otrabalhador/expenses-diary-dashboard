@@ -64,27 +64,14 @@ export default {
 
   .btn {
     min-width: 100px;
-    border: 1px solid;
     padding: 10px;
     border-radius: 5px;
     margin-left: 5px;
-
   }
 
   * {
     outline: none;
   }
-
-  button.btn.active,
-  button.btn-inverse.active {
-    @include primary-color-dark;
-  }
-
-  button.btn { @include primary-color-dark-outline; }
-  button.btn:active { @include primary-color-dark; }
-
-  button.btn.btn-red { @include red-outline; }
-  button.btn.btn-red:active { @include red; }
 
   .btn-big {
     min-width: 15vw;
@@ -92,16 +79,43 @@ export default {
   }
 
 
+  .btn-icon-sm {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    padding: 5px 2px 2px 2px;
+    margin: 0 2px;
+    @include shadow;
+  }  
+
   .btn-icon {
     width: 50px;
     height: 50px;
     border-radius: 50px;
     padding: 8px 2px 2px 2px;
-    @include primary-color-dark;
     @include shadow;
   }  
 
-  .btn-icon:active { @include primary-color-dark-outline }
+
+  .btn-icon { @include primary-color-dark; }
+  .btn-icon:active { @include primary-color-dark-outline; }
+  // .btn-icon-sm { @include secondary-color-dark; }
+  // .btn-icon-sm:active { @include secondary-color-dark-outline; }
+
+  .btn.active { @include primary-color-dark; }
+  .btn-inverse.active { @include primary-color-dark; }
+
+  .btn { @include primary-color-dark; }
+  .btn:active { @include primary-color-dark-outline; }
+
+  .btn-red { @include red; }
+  
+  .btn-red:active { @include red-outline; }
+
+  .btn-blue { @include blue; }
+  .btn-blue:active { @include blue-outline; }
+
+
 
 
   form {

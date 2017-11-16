@@ -7,12 +7,26 @@
       <template v-for="column in computedColumns">
         <div class='-table-cell -table-cell-header'>{{column['label']}}</div>
       </template>
-        
+
+      <div class='-table-cell -table-rbar-header'></div>
+
       <!-- Content -->
       <template v-for="(row, rowNumber) in data">
         <div class='-table-cell' :class="{'-table-cell-even': isEven(rowNumber)}" v-for="column in computedColumns">
           {{row[column['field']]}}
         </div>
+
+      <div class='-table-cell -table-rbar-cell' :class="{'-table-cell-even': isEven(rowNumber)}">
+        
+        <button class='btn-icon-sm btn-blue' @click="editExpense(row)">
+          <icon name="edit" scale="1"></icon>
+        </button>      
+
+        <button class='btn-icon-sm btn-red' @click="deleteExpense(row)">
+          <icon name="trash" scale="1"></icon>
+        </button>      
+      </div>        
+
       </template>
 
     </div>
@@ -45,6 +59,12 @@ export default {
   methods: {
     isEven (value) {
       return value % 2 !== 0
+    },
+    editExpense (expense) {
+      this.$modal.show('expense-form', { expense: expense })
+    },
+    deleteExpense () {
+      console.log('Not implemented')
     }
   },
   computed: {
@@ -74,6 +94,7 @@ export default {
   @import '../../sass/_variables.scss';
 
   $bw: 3px;  // border width
+  $rbar-width: 7%;
 
   .-wrap-table {
     display: flex;
@@ -98,7 +119,7 @@ export default {
       flex-shrink: 1;
       width: 100%;  // Default to full width
       
-
+      box-sizing: border-box;
       padding: 0.5em 0.4em;
       margin: 0;
 
@@ -107,32 +128,45 @@ export default {
       border-top: 1px solid black;
       background-color: fade(slategrey,20%);
       > h1, > h2, > h3, > h4, > h5, > h6 { margin: 0; }
+
+
+      &.-table-rbar-header {
+        width: $rbar-width;
+      }
+
+      &.-table-rbar-cell {
+        width: $rbar-width;
+      }
+
+      &.-table-cell-even {
+        background-color: $primary-color-light;
+      }
+
+      &.-table-cell-header,
+      &.-table-rbar-header {
+        background-color: $primary-color;
+        font-weight: bold;
+        font-size: 1.2em;
+      }
     }
 
-    .-table-cell-even {
-      background-color: $primary-color-light;
-    }
 
-    .-table-cell-header {
-      background-color: $primary-color;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
   }
 
 
-  .-table--2cols > .-table-cell  { width: 50%; }
-  .-table--3cols > .-table-cell  { width: 33.33%; }
-  .-table--4cols > .-table-cell  { width: 25%; }
-  .-table--5cols > .-table-cell  { width: 20%; }
-  .-table--6cols > .-table-cell  { width: 16.6%; }
-  .-table--7cols > .-table-cell  { width: 14.28%; }
-  .-table--8cols > .-table-cell  { width: 12.25%; }
-  .-table--9cols > .-table-cell  { width: 11.11%; }
-  .-table--10cols > .-table-cell  { width: 10.00%; }
-  .-table--11cols > .-table-cell  { width: 9.00%; }
-  .-table--12cols > .-table-cell  { width: 8.33%; }
-  .-table--13cols > .-table-cell  { width: 7.69%; }
+  .-table--2cols > .-table-cell  { width: (100% - $rbar-width)/2 }
+  .-table--3cols > .-table-cell  { width: (100% - $rbar-width)/3 }
+  .-table--4cols > .-table-cell  { width: (100% - $rbar-width)/4 }
+  .-table--5cols > .-table-cell  { width: (100% - $rbar-width)/5 }
+  .-table--6cols > .-table-cell  { width: (100% - $rbar-width)/6 }
+  // .-table--6cols > .-table-cell  { width: 14%; }
+  .-table--7cols > .-table-cell  { width: (100% - $rbar-width)/7 }
+  .-table--8cols > .-table-cell  { width: (100% - $rbar-width)/8 }
+  .-table--9cols > .-table-cell  { width: (100% - $rbar-width)/9 }
+  .-table--10cols > .-table-cell  { width: (100% - $rbar-width)/10 }
+  .-table--11cols > .-table-cell  { width: (100% - $rbar-width)/11 }
+  .-table--12cols > .-table-cell  { width: (100% - $rbar-width)/12 }
+  .-table--13cols > .-table-cell  { width: (100% - $rbar-width)/13 }
 
 
 </style>

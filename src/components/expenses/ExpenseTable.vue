@@ -63,8 +63,24 @@ export default {
     editExpense (expense) {
       this.$modal.show('expense-form', { expense: expense })
     },
-    deleteExpense () {
-      console.log('Not implemented')
+    deleteExpense (expense) {
+      this.$store.dispatch('deleteExpense', expense.id)
+        .then((message) => {
+          this.$notify({
+            type: 'info',
+            group: 'info',
+            title: 'Expense',
+            text: message
+          })
+        })
+        .catch((err) => {
+          this.$notify({
+            type: 'error',
+            group: 'error',
+            title: 'Expense',
+            text: err
+          })
+        })
     }
   },
   computed: {

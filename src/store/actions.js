@@ -85,6 +85,22 @@ export default {
           reject(err.response ? err.response.data.message : 'Server is indisponible')
         })
     })
-  }
+  },
 
+  deleteExpense: (context, expenseId) => {
+    let expenseUrl = singleExpenseUrl(expenseId)
+
+    return new Promise((resolve, reject) => {
+      axios.delete(expenseUrl, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('deleteExpense', expenseId)
+          resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  }
 }

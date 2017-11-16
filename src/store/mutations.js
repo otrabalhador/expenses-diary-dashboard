@@ -28,5 +28,14 @@ export default {
     let index = state.expenses.map((el) => el.id).indexOf(expense.id)
     state.expenses.splice(index, 1)
     state.expenses.splice(index, 0, expense)
+  },
+
+  deleteExpense: (state, expenseId) => {
+    let index = state.expenses.map((el) => el.id).indexOf(expenseId)
+    // state.expenses = state.expenses.filter(el => {
+    //   el.id !== expenseId
+    // })
+    Vue.delete(state.expenses, index)
+    // state.expenses.splice(index, 1)
   }
 }

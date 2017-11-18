@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export default {
 
   login: (state, user) => {
@@ -14,7 +16,26 @@ export default {
 
   // expenses
   fetchExpenses: (state, expenses) => {
-    state.expenses = expenses.content
+    Vue.set(state, 'expenses', expenses.content)
     state.totalExpenses = expenses.total
+  },
+
+  newExpense: (state, expense) => {
+    state.expenses.push(expense)
+  },
+
+  editExpense: (state, expense) => {
+    let index = state.expenses.map((el) => el.id).indexOf(expense.id)
+    state.expenses.splice(index, 1)
+    state.expenses.splice(index, 0, expense)
+  },
+
+  deleteExpense: (state, expenseId) => {
+    let index = state.expenses.map((el) => el.id).indexOf(expenseId)
+    // state.expenses = state.expenses.filter(el => {
+    //   el.id !== expenseId
+    // })
+    Vue.delete(state.expenses, index)
+    // state.expenses.splice(index, 1)
   }
 }

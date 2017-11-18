@@ -1,8 +1,13 @@
 import store from '@/store'
 import axios from 'axios'
-const EXD_URL = 'http://localhost:5000/v1/'
+const EXD_URL = process.env.EXD_EXPENSES_URL ? process.env.EXD_EXPENSES_URL : 'localhost:5000/v1/'
 const EXD_AUTH_URL = EXD_URL + 'login'
 const EXD_EXPENSES_URL = EXD_URL + 'expenses'
+const EXD_EXPENSE_URL = EXD_URL + 'expense/%expenseId%'
+
+function singleExpenseUrl (expenseId) {
+  return EXD_EXPENSE_URL.replace(/%expenseId%/g, expenseId)
+}
 
 export default {
   login: (context, credentials) => {
@@ -35,9 +40,67 @@ export default {
           context.commit('fetchExpenses', response.data)
         })
         .catch((err) => {
-          reject(err.response.data.message)
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  },
+
+  newExpense: (context, expense) => {
+    return new Promise((resolve, reject) => {
+      axios.post(EXD_EXPENSES_URL, {
+        ...expense
+      }, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('newExpense', expense)
+          resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  },
+
+  editExpense: (context, expense) => {
+    let expenseUrl = singleExpenseUrl(expense.id)
+
+    return new Promise((resolve, reject) => {
+      axios.patch(expenseUrl, {
+        payment_origin_id: expense.payment_origin_id,
+        category_id: expense.category_id,
+        reference_date: expense.reference_date,
+        description: expense.description,
+        amount: expense.amount,
+        regreted: expense.regreted,
+        comments: expense.comments
+      }, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('editExpense', expense)
+          resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  },
+
+  deleteExpense: (context, expenseId) => {
+    let expenseUrl = singleExpenseUrl(expenseId)
+
+    return new Promise((resolve, reject) => {
+      axios.delete(expenseUrl, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('deleteExpense', expenseId)
+          resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
         })
     })
   }
-
 }

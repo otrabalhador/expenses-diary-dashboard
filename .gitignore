@@ -12,3 +12,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 yarn.lock
+.eslintrc.yml

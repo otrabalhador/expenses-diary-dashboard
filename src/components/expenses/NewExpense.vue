@@ -3,11 +3,14 @@
     <modal 
       name="expense-form"
       :width="400"
-      :height="500"
+      :height="600"
       @before-open="beforeOpen"
       >
 
-      <div class='-wrapper'>
+      <loading v-show="loading" :msg="loading.msg"></loading>
+
+      <div class='-wrapper-vertical'>
+
 
       <form>
 
@@ -92,15 +95,15 @@
 
       <div class="-wrapper-modal">
 
-        <button class='btn btn-red' @click="$modal.hide('expense-form');">
+        <button class='-btn -btn-red' @click="$modal.hide('expense-form');">
           Close
         </button>
         
-        <button class='btn' v-if="newExpenseModal" @click="newExpense()">
+        <button class='-btn' v-if="newExpenseModal" @click="newExpense()">
           Create
         </button>
         
-        <button class='btn' v-else @click="editExpense()">
+        <button class='-btn' v-else @click="editExpense()">
           Edit
         </button>
 
@@ -111,10 +114,12 @@
 </template>
 
 <script>
+import Loading from '@/components/loading/Loading'
 export default {
   name: 'new-expense',
   data () {
     return {
+      loading: false,
       expense: {},
       emptyExpense: {
         reference_date: null,
@@ -145,8 +150,10 @@ export default {
       }
     },
     newExpense () {
+      this.loading = { msg: 'Creating new expense' }
       this.$store.dispatch('newExpense', this.expense)
         .then((message) => {
+          this.loading = false
           this.$notify({
             type: 'info',
             group: 'info',
@@ -156,6 +163,7 @@ export default {
           this.$modal.hide('expense-form')
         })
         .catch((err) => {
+          this.loading = false
           this.$notify({
             type: 'error',
             group: 'error',
@@ -165,8 +173,10 @@ export default {
         })
     },
     editExpense (expense) {
+      this.loading = { msg: 'Editing expense' }
       this.$store.dispatch('editExpense', this.expense)
         .then((message) => {
+          this.loading = false
           this.$notify({
             type: 'info',
             group: 'info',
@@ -176,6 +186,7 @@ export default {
           this.$modal.hide('expense-form')
         })
         .catch((err) => {
+          this.loading = false
           this.$notify({
             type: 'error',
             group: 'error',
@@ -184,7 +195,8 @@ export default {
           })
         })
     }
-  }
+  },
+  components: { Loading }
 }
 </script>
 
@@ -205,7 +217,7 @@ export default {
     }
   }
 
-  .btn {
+  .-btn {
     border-radius: 0;
   }
 

@@ -1,6 +1,6 @@
 import store from '@/store'
 import axios from 'axios'
-const EXD_URL = process.env.EXD_EXPENSES_URL ? process.env.EXD_EXPENSES_URL : 'localhost:5000/v1/'
+const EXD_URL = process.env.EXD_EXPENSES_URL
 const EXD_AUTH_URL = EXD_URL + 'login'
 const EXD_EXPENSES_URL = EXD_URL + 'expenses'
 const EXD_EXPENSE_URL = EXD_URL + 'expense/%expenseId%'
@@ -38,6 +38,7 @@ export default {
       })
         .then((response) => {
           context.commit('fetchExpenses', response.data)
+          resolve()
         })
         .catch((err) => {
           reject(err.response ? err.response.data.message : 'Server is indisponible')

@@ -1,14 +1,10 @@
 <template>
   <div id="expenses">
-<!-- 
-    <modal name="hello-world">
-      hello, world!
-    </modal>
- -->
+    <loading v-show="loading" :msg="loading.msg"></loading>
     <new-expense></new-expense>
 
     <div class="-fixed-right">
-    <button class='btn-icon' @click="newExpense">
+    <button class='-btn -btn-icon' @click="newExpense">
       <icon name="plus" scale="2"></icon>
     </button>
     </div>
@@ -25,13 +21,26 @@
 <script>
   import ExpenseTable from '@/components/expenses/ExpenseTable'
   import NewExpense from '@/components/expenses/NewExpense'
+  import Loading from '@/components/loading/Loading'
   import { mapGetters } from 'vuex'
 
   export default {
     name: 'expenses',
+    data () {
+      return {
+        loading: {
+          msg: 'Fetching expenses'
+        }
+      }
+    },
     created () {
       this.$store.dispatch('fetchExpenses')
+        .then(() => {
+          this.loading = false
+        })
         .catch((err) => {
+          this.loading = false
+
           this.$notify({
             type: 'error',
             group: 'error',
@@ -41,18 +50,7 @@
     },
     methods: {
       newExpense () {
-        this.$modal.show('expense-form', {
-          title: 'Alert!',
-          text: 'You are too awesome',
-          buttons: [
-            {
-              title: 'Deal with it',
-              handler: () => { alert('Woot!') }
-            },
-            {
-              title: 'Close'
-            }]
-        })
+        this.$modal.show('expense-form')
       }
     },
     computed: mapGetters([
@@ -61,7 +59,7 @@
       'totalExpenses',
       'totalExpensesAmount'
     ]),
-    components: { ExpenseTable, NewExpense }
+    components: { ExpenseTable, NewExpense, Loading }
   }
 </script>
 

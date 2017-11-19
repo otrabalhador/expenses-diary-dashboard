@@ -1,0 +1,32 @@
+form {
+  display: grid;
+  justify-content: center;
+
+  * {
+    margin-top: 20px;
+  }
+}
+
+.form-group {
+
+  align-items: center;
+  display: grid;
+  grid-template-areas: 'label . input';
+  grid-template-columns: 1fr 20px 3fr;
+
+
+  .form-label {
+    font-weight: bold;
+
+    grid-area: label;
+    justify-self: right;
+  }
+
+  .form-input {
+    background-color: transparent;
+    border-bottom: 2px solid $black;
+    grid-area: input;
+    height: 2em;
+    padding-left: 10px;
+  }
+}

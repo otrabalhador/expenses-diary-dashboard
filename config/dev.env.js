@@ -2,8 +2,8 @@
 
 const merge = require('webpack-merge')
 const prodEnv = require('./prod.env')
+const devSecretEnv = require('./dev.env.secret.js')
 
-module.exports = merge(prodEnv, {
-  NODE_ENV: '"development"',
-  EXD_EXPENSES_URL: JSON.stringify(process.env.EXD_EXPENSES_URL)
+module.exports = merge(prodEnv, devSecretEnv, {
+  NODE_ENV: '"development"'
 })

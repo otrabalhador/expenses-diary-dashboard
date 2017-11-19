@@ -1,0 +1,106 @@
+@import 'variables';
+
+button,
+button:hover,
+button:active,
+button:focus {
+  outline: none;
+}
+
+.-btn,
+.-btn-sm,
+.-btn-lg {
+  @include primary-color-dark;
+  // transition-duration: 0.4s;
+
+  &:disabled,
+  &:hover:disabled,
+  &:active:disabled { @include primary-color-dark-outline; }
+
+  &:hover:not(:disabled) {
+    @include primary-color-semi-dark;
+  }
+
+  &:active:not(:disabled) {
+    @include primary-color-dark-outline; }
+
+
+  &.-btn-icon {
+    width: 50px;
+    border-radius: 50px;
+    height: 50px;
+    padding: 8px 2px 2px;
+  }
+
+  &.-btn-icon-sm {
+    border-radius: 25px;
+    height: 25px;
+    margin: 0 2px;
+    padding: 5px 2px 2px;
+    width: 25px;
+  }
+
+  .-btn-group {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+
+    * {
+      margin: 0 0 0 2px;
+      padding: 0;
+    }
+  }
+
+}
+
+.-btn-red,
+.-btn-sm-red,
+.-btn-lg-red {
+  @include red;
+  // transition-duration: 0.4s;
+
+  &:disabled,
+  &:hover:disabled,
+  &:active:disabled { @include disabled; }
+
+  &:hover:not(:disabled) {
+    @include soft-red;
+  }
+
+  &:active:not(:disabled) {
+    @include red-outline; }
+}
+
+
+.-btn-blue,
+.-btn-sm-blue,
+.-btn-lg-blue {
+  @include blue;
+  // transition-duration: 0.4s;
+
+  &:disabled,
+  &:hover:disabled,
+  &:active:disabled { @include disabled; }
+
+  &:hover:not(:disabled) {
+    @include soft-blue;
+  }
+
+  &:active:not(:disabled) {
+    @include blue-outline; }
+}
+
+.-btn {
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  width: 120px;
+}
+
+.-btn-big {
+  min-width: 15vw;
+  padding: 10px;
+}
+
+.-btn-icon:active { @include primary-color-dark-outline; }

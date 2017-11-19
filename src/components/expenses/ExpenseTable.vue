@@ -1,33 +1,39 @@
 <template>
-  <div id="table" class="-wrap-table">
+  <div id="table">
+  
+    <loading v-if="loading" :msg="loading.msg"></loading>
 
-    <div class="-table" :class="columnClass">
+    <div class="-wrap-table">
+      
+      <div class="-table" :class="columnClass">
 
-        <!-- Headers -->
-      <template v-for="column in computedColumns">
-        <div class='-table-cell -table-cell-header'>{{column['label']}}</div>
-      </template>
+          <!-- Headers -->
+        <template v-for="column in computedColumns">
+          <div class='-table-cell -table-cell-header'>{{column['label']}}</div>
+        </template>
 
-      <div class='-table-cell -table-rbar-header'></div>
+        <div class='-table-cell -table-rbar-header'></div>
 
-      <!-- Content -->
-      <template v-for="(row, rowNumber) in data">
-        <div class='-table-cell' :class="{'-table-cell-even': isEven(rowNumber)}" v-for="column in computedColumns">
-          {{row[column['field']]}}
-        </div>
+        <!-- Content -->
+        <template v-for="(row, rowNumber) in data">
+          <div class='-table-cell' :class="{'-table-cell-even': isEven(rowNumber)}" v-for="column in computedColumns">
+            {{row[column['field']]}}
+          </div>
 
-      <div class='-table-cell -table-rbar-cell' :class="{'-table-cell-even': isEven(rowNumber)}">
-        
-        <button class='btn-icon-sm btn-blue' @click="editExpense(row)">
-          <icon name="edit" scale="1"></icon>
-        </button>      
+        <div class='-table-cell -table-rbar-cell' :class="{'-table-cell-even': isEven(rowNumber)}">
+          
+          <button class='-btn -btn-icon-sm -btn-blue' @click="editExpense(row)">
+            <icon name="edit" scale="1"></icon>
+          </button>      
 
-        <button class='btn-icon-sm btn-red' @click="confirmDeletion(row)">
-          <icon name="trash" scale="1"></icon>
-        </button>      
-      </div>        
+          <button class='-btn -btn-icon-sm -btn-red' @click="confirmDeletion(row)">
+            <icon name="trash" scale="1"></icon>
+          </button>      
+        </div>        
 
-      </template>
+        </template>
+
+      </div>
 
     </div>
 
@@ -35,6 +41,7 @@
 </template>
 
 <script>
+import Loading from '@/components/loading/Loading'
 export default {
   name: 'table',
   props: {
@@ -54,6 +61,11 @@ export default {
       default () {
         return null
       }
+    }
+  },
+  data () {
+    return {
+      loading: null
     }
   },
   methods: {
@@ -80,8 +92,10 @@ export default {
       })
     },
     deleteExpense (expense) {
+      this.loading = { msg: 'Removing expense' }
       this.$store.dispatch('deleteExpense', expense.id)
         .then((message) => {
+          this.loading = false
           this.$notify({
             type: 'info',
             group: 'info',
@@ -90,6 +104,7 @@ export default {
           })
         })
         .catch((err) => {
+          this.loading = false
           this.$notify({
             type: 'error',
             group: 'error',
@@ -117,7 +132,8 @@ export default {
       let className = '-table--%colN%cols'
       return className.replace(/%colN%/g, colN)
     }
-  }
+  },
+  components: { Loading }
 }
 </script>
 

@@ -92,15 +92,15 @@
 
       <div class="-wrapper-modal">
 
-        <button class='btn btn-red' @click="$modal.hide('expense-form');">
+        <button class='-btn -btn-red' @click="$modal.hide('expense-form');">
           Close
         </button>
         
-        <button class='btn' v-if="newExpenseModal" @click="newExpense()">
+        <button class='-btn' v-if="newExpenseModal" @click="newExpense()">
           Create
         </button>
         
-        <button class='btn' v-else @click="editExpense()">
+        <button class='-btn' v-else @click="editExpense()">
           Edit
         </button>
 
@@ -205,7 +205,7 @@ export default {
     }
   }
 
-  .btn {
+  .-btn {
     border-radius: 0;
   }
 

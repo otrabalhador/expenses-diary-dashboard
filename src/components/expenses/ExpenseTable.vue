@@ -18,11 +18,11 @@
 
       <div class='-table-cell -table-rbar-cell' :class="{'-table-cell-even': isEven(rowNumber)}">
         
-        <button class='btn-icon-sm btn-blue' @click="editExpense(row)">
+        <button class='-btn -btn-icon-sm -btn-blue' @click="editExpense(row)">
           <icon name="edit" scale="1"></icon>
         </button>      
 
-        <button class='btn-icon-sm btn-red' @click="confirmDeletion(row)">
+        <button class='-btn -btn-icon-sm -btn-red' @click="confirmDeletion(row)">
           <icon name="trash" scale="1"></icon>
         </button>      
       </div>        

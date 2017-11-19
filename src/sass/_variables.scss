@@ -2,15 +2,19 @@
 // https://material.io/color/#!/?view.left=0&view.right=0&primary.color=4527A0&secondary.color=4FC3F7
 $primary-color: #b2ff59;
 $primary-color-light: #e7ff8c;
-$primary-color-dark: #7ecb20;
+$primary-color-dark: #32cb00;
+$primary-color-semi-dark: #7ecb20;
 
 $secondary-color: #ff0;
 $secondary-color-light: #ffff5a;
 $secondary-color-dark: #c7cc00;
 
+$disabled-color: #808080;
+
 $white: #fff;
 $black: #000;
 $shallow-gray: #808080;
+$shadow-gray: #707070;
 $almost-black: #292929;
 $baby-blue: #dcffff;
 
@@ -20,8 +24,10 @@ $left-width: (100% - $size-width) / 2;
 $right-width: (100% - $size-width) / 2;
 
 
-$soft-red: #e04b35;
-$soft-blue: #509ce4;
+$red: #e04b35;
+$soft-red: #ff6e40;
+$blue: #00acc1;
+$soft-blue: #4fc3f7;
 
 // mixins colors
 @mixin primary-color {
@@ -36,11 +42,22 @@ $soft-blue: #509ce4;
 
 @mixin primary-color-dark {
   background-color: $primary-color-dark;
-  color: white;
+  color: $white;
+
   * {
-    color: white;
+    color: $white;
   }
 }
+
+@mixin primary-color-semi-dark {
+  background-color: $primary-color-semi-dark;
+  color: $white;
+
+  * {
+    color: $white;
+  }
+}
+
 
 @mixin secondary-color {
   background-color: $secondary-color;
@@ -54,69 +71,101 @@ $soft-blue: #509ce4;
 
 @mixin secondary-color-dark {
   background-color: $secondary-color-dark;
-  color: white;
+  color: $white;
+
   * {
-    color: white;
+    color: $white;
   }
 }
 
 @mixin primary-color-dark-outline {
   color: $primary-color-dark;
   border: 1px solid $primary-color-dark;
-  background-color: white;
+  background-color: $white;
+
   * {
     color: $primary-color-dark;
   }
 }
+
 @mixin secondary-color-dark-outline {
   color: $secondary-color-dark;
   border: 1px solid $secondary-color-dark;
-  background-color: white;
+  background-color: $white;
+
   * {
     color: $secondary-color-dark;
-  }  
+  }
 }
 
+
+@mixin blue {
+  background-color: $blue;
+  color: $white;
+
+  * {
+    color: $white;
+  }
+}
+
+@mixin soft-blue {
+  background-color: $soft-blue;
+  color: $white;
+
+  * {
+    color: $white;
+  }
+}
 
 @mixin blue-outline {
   color: $soft-blue;
   border: 1px solid $soft-blue;
-  background-color: white;
+  background-color: $white;
+
   * {
     color: $soft-blue;
   }
 }
 
-@mixin blue {
-  background-color: $soft-blue;
-  color: white;
+@mixin red {
+  background-color: $red;
+  color: $white;
+
   * {
-    color: white;
+    color: $white;
   }
 }
 
+@mixin soft-red {
+  background-color: $soft-red;
+  color: $white;
+
+  * {
+    color: $white;
+  }
+}
 
 @mixin red-outline {
   color: $soft-red;
   border: 1px solid $soft-red;
-  background-color: white;
+  background-color: $white;
+
   * {
     color: $soft-red;
   }
 }
 
-@mixin red {
-  background-color: $soft-red;
-  color: white;
-  * {
-    color: white;
-  }
+
+@mixin disabled {
+  background-color: $disabled-color;
 }
 
 
 // mixins shadow
 @mixin shadow {
-  box-shadow: 0px 4px 70px -18px #707070;
+  box-shadow: 0 4px 70px -18px $shadow-gray;
 }
 
+
+// transition
 

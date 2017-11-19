@@ -1,14 +1,10 @@
 <template>
   <div id="expenses">
-<!-- 
-    <modal name="hello-world">
-      hello, world!
-    </modal>
- -->
+
     <new-expense></new-expense>
 
     <div class="-fixed-right">
-    <button class='btn-icon' @click="newExpense">
+    <button class='-btn -btn-icon' @click="newExpense">
       <icon name="plus" scale="2"></icon>
     </button>
     </div>

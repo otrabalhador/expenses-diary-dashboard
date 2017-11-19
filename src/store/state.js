@@ -38,5 +38,6 @@ export default {
     }
   ],
 
+  totalExpenses: 0,
   expenses: [{}]
 }

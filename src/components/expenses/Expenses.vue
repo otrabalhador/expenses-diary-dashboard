@@ -1,6 +1,6 @@
 <template>
   <div id="expenses">
-
+    <loading v-show="loading" :msg="loading.msg"></loading>
     <new-expense></new-expense>
 
     <div class="-fixed-right">
@@ -21,13 +21,26 @@
 <script>
   import ExpenseTable from '@/components/expenses/ExpenseTable'
   import NewExpense from '@/components/expenses/NewExpense'
+  import Loading from '@/components/loading/Loading'
   import { mapGetters } from 'vuex'
 
   export default {
     name: 'expenses',
+    data () {
+      return {
+        loading: {
+          msg: 'Fetching expenses'
+        }
+      }
+    },
     created () {
       this.$store.dispatch('fetchExpenses')
+        .then(() => {
+          this.loading = false
+        })
         .catch((err) => {
+          this.loading = false
+
           this.$notify({
             type: 'error',
             group: 'error',
@@ -46,7 +59,7 @@
       'totalExpenses',
       'totalExpensesAmount'
     ]),
-    components: { ExpenseTable, NewExpense }
+    components: { ExpenseTable, NewExpense, Loading }
   }
 </script>
 

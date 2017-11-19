@@ -38,6 +38,7 @@ export default {
       })
         .then((response) => {
           context.commit('fetchExpenses', response.data)
+          resolve()
         })
         .catch((err) => {
           reject(err.response ? err.response.data.message : 'Server is indisponible')

@@ -37,18 +37,7 @@
     },
     methods: {
       newExpense () {
-        this.$modal.show('expense-form', {
-          title: 'Alert!',
-          text: 'You are too awesome',
-          buttons: [
-            {
-              title: 'Deal with it',
-              handler: () => { alert('Woot!') }
-            },
-            {
-              title: 'Close'
-            }]
-        })
+        this.$modal.show('expense-form')
       }
     },
     computed: mapGetters([

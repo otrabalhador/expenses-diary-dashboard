@@ -15,7 +15,7 @@ button:focus {
 
   &:disabled,
   &:hover:disabled,
-  &:active:disabled { @include disabled; }
+  &:active:disabled { @include primary-color-dark-outline; }
 
   &:hover:not(:disabled) {
     @include primary-color-semi-dark;
@@ -40,6 +40,17 @@ button:focus {
     width: 25px;
   }
 
+  .-btn-group {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+
+    * {
+      margin: 0 0 0 2px;
+      padding: 0;
+    }
+  }
 
 }
 
@@ -84,7 +95,7 @@ button:focus {
   border-radius: 5px;
   margin-left: 5px;
   padding: 10px;
-  width: 100px;
+  width: 120px;
 }
 
 .-btn-big {
@@ -93,13 +104,3 @@ button:focus {
 }
 
 .-btn-icon:active { @include primary-color-dark-outline; }
-
-.-btn-group {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    * {
-      margin: 0 0 0 2px;
-    }
-
-  }

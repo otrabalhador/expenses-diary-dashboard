@@ -12,7 +12,20 @@
         <input id='password' class='form-input' type='password' v-model="credentials.password"/>
       </div>
 
-      <button type='submit' class='btn' value='Logar' @click="handleLogin()">Logar</button>
+      <button type='submit' class='-btn' value='Logar' :disabled="loading" @click="handleLogin()">
+        
+        <div class="-btn-group">
+          <span v-if="loading">
+              <icon name="spinner" pulse></icon>
+              <span class="btn-message">Logging in</span>
+          </span>
+
+          <span v-else>
+            <span class="-btn-message">Logar</span>
+          </span>
+        </div>
+
+      </button>
     </form>
   </div>
 </template>
@@ -24,11 +37,13 @@ export default {
       credentials: {
         email: '',
         password: ''
-      }
+      },
+      loading: false
     }
   },
   methods: {
     handleLogin () {
+      this.loading = true
       this.$store.dispatch('login', this.credentials)
         .then(() => {
           let route = '/'
@@ -42,6 +57,7 @@ export default {
             text: err
           })
           this.err = err
+          this.loading = false
         })
     }
   }

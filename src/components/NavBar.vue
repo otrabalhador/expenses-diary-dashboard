@@ -20,6 +20,10 @@
           <li :class="{ active: isActive(routeDetails.login.name)}">Login</li>
         </router-link>
 
+        <router-link v-if="!isLoggedIn" class="link" :to="routeDetails.register.path">
+          <li :class="{ active: isActive(routeDetails.register.name)}">Register</li>
+        </router-link>
+
         <router-link v-else :to="routeDetails.logout.path">
           <li @click="handleLogout()">Logout</li>
         </router-link>
@@ -68,6 +72,8 @@ export default {
     left: 0;
     height: 100px;
     width: 100vw;
+
+    margin-bottom: 10px;
 
     @include primary-color;
 

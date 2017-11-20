@@ -2,6 +2,10 @@ const publicRoutes = {
   login: {
     path: '/login',
     name: 'Login'
+  },
+  register: {
+    path: '/register',
+    name: 'Register'
   }
 }
 

@@ -4,6 +4,7 @@ import routeDetails from './route_details'
 
 import Index from '@/components/Index'
 import Login from '@/components/auth/Login'
+import Register from '@/components/auth/Register'
 
 import Expenses from '@/components/expenses/Expenses'
 
@@ -20,6 +21,10 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      ...routeDetails.register,
+      component: Register
     },
     {
       ...routeDetails.expenses,

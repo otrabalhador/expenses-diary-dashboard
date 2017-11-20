@@ -16,15 +16,15 @@
 
         <!-- Reference Date -->
         <div class="form-group">
-          <label for="reference_date" class="control-label">
+          <label for="referenceDate" class="control-label">
             Date
           </label>
           <input 
-            id="reference_date" 
+            id="referenceDate" 
             type="date" 
             placeholder="Date" 
             class="form-input" 
-            v-model="expense.reference_date">
+            v-model="expense.referenceDate">
         </div>
 
 
@@ -49,19 +49,19 @@
             type="number"
             placeholder="category id" 
             class="form-input" 
-            v-model="expense.category_id">
+            v-model="expense.categoryId">
         </div>
 
         <div class="form-group">
-          <label for="payment_origin_id" class="control-label">
+          <label for="paymentOriginId" class="control-label">
             Payment Origin
           </label>
           <input
-            id="payment_origin_id" 
+            id="paymentOriginId" 
             type="number"
             placeholder="Payment Origin Id" 
             class="form-input" 
-            v-model="expense.payment_origin_id">
+            v-model="expense.paymentOriginId">
         </div>
 
         <div class="form-group">
@@ -122,10 +122,10 @@ export default {
       loading: false,
       expense: {},
       emptyExpense: {
-        reference_date: null,
+        referenceDate: null,
         description: null,
-        category_id: 1,
-        payment_origin_id: null,
+        categoryId: 1,
+        paymentOriginId: null,
         regreted: null,
         amount: null
       },

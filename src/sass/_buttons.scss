@@ -10,19 +10,19 @@ button:focus {
 .-btn,
 .-btn-sm,
 .-btn-lg {
-  @include primary-color-dark;
+  @include secondary-color;
   // transition-duration: 0.4s;
 
   &:disabled,
   &:hover:disabled,
-  &:active:disabled { @include primary-color-dark-outline; }
+  &:active:disabled { @include secondary-color-dark-outline; }
 
   &:hover:not(:disabled) {
-    @include primary-color-semi-dark;
+    @include secondary-color-light;
   }
 
   &:active:not(:disabled) {
-    @include primary-color-dark-outline; }
+    @include secondary-color-dark-outline; }
 
 
   &.-btn-icon {
@@ -95,7 +95,7 @@ button:focus {
   border-radius: 5px;
   margin-left: 5px;
   padding: 10px;
-  width: 120px;
+  width: auto;
 }
 
 .-btn-big {
@@ -103,4 +103,4 @@ button:focus {
   padding: 10px;
 }
 
-.-btn-icon:active { @include primary-color-dark-outline; }
+.-btn-icon:active { @include secondary-color-dark-outline; }

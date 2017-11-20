@@ -73,6 +73,8 @@ export default {
     height: 100px;
     width: 100vw;
 
+    margin-bottom: 10px;
+
     @include primary-color;
 
     .-brand {

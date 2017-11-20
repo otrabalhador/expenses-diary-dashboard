@@ -1,13 +1,13 @@
 // Colors //
-// https://material.io/color/#!/?view.left=0&view.right=0&primary.color=4527A0&secondary.color=4FC3F7
-$primary-color: #b2ff59;
-$primary-color-light: #e7ff8c;
-$primary-color-dark: #32cb00;
-$primary-color-semi-dark: #76ff03;
+// https://material.io/color/#!/?view.left=0&view.right=1&primary.color=a1ffdd&secondary.color=76FF03
+$primary-color: #a1ffdd;
+$primary-color-light: #d5ffff;
+$primary-color-dark: #6fcbab;
+$primary-color-semi-dark: #d5ffff;
 
-$secondary-color: #ff0;
-$secondary-color-light: #ffff5a;
-$secondary-color-dark: #c7cc00;
+$secondary-color: #4fff00;
+$secondary-color-light: #90ff56;
+$secondary-color-dark: #00ca00;
 
 $disabled-color: #808080;
 
@@ -29,53 +29,47 @@ $soft-red: #ff6e40;
 $blue: #00acc1;
 $soft-blue: #4fc3f7;
 
+
+@mixin full-black {
+  color: $black;
+
+  * {
+    color: $black;
+  }
+}
+
+
+@mixin full-white {
+  color: $white;
+
+  * {
+    color: $white;
+  }
+}
+
 // mixins colors
 @mixin primary-color {
   background-color: $primary-color;
-  color: $black;
+
+  @include full-black;
 }
 
 @mixin primary-color-light {
   background-color: $primary-color-light;
-  color: $black;
-}
 
-@mixin primary-color-dark {
-  background-color: $primary-color-dark;
-  color: $white;
-
-  * {
-    color: $white;
-  }
+  @include full-black;
 }
 
 @mixin primary-color-semi-dark {
   background-color: $primary-color-semi-dark;
-  color: $white;
 
-  * {
-    color: $white;
-  }
+  @include full-black;
 }
 
+@mixin primary-color-dark {
+  background-color: $primary-color-dark;
 
-@mixin secondary-color {
-  background-color: $secondary-color;
-  color: $black;
-}
-
-@mixin secondary-color-light {
-  background-color: $secondary-color-light;
-  color: $black;
-}
-
-@mixin secondary-color-dark {
-  background-color: $secondary-color-dark;
-  color: $white;
-
-  * {
-    color: $white;
-  }
+  @include full-black;
 }
 
 @mixin primary-color-dark-outline {
@@ -86,6 +80,24 @@ $soft-blue: #4fc3f7;
   * {
     color: $primary-color-dark;
   }
+}
+
+@mixin secondary-color {
+  background-color: $secondary-color;
+
+  @include full-black;
+}
+
+@mixin secondary-color-light {
+  background-color: $secondary-color-light;
+
+  @include full-black;
+}
+
+@mixin secondary-color-dark {
+  background-color: $secondary-color-dark;
+
+  @include full-black;
 }
 
 @mixin secondary-color-dark-outline {
@@ -101,20 +113,15 @@ $soft-blue: #4fc3f7;
 
 @mixin blue {
   background-color: $blue;
-  color: $white;
 
-  * {
-    color: $white;
-  }
+  @include full-white;
 }
+
 
 @mixin soft-blue {
   background-color: $soft-blue;
-  color: $white;
 
-  * {
-    color: $white;
-  }
+  @include full-white;
 }
 
 @mixin blue-outline {

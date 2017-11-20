@@ -2,6 +2,7 @@ import store from '@/store'
 import axios from 'axios'
 const EXD_URL = process.env.EXD_EXPENSES_URL
 const EXD_AUTH_URL = EXD_URL + 'login'
+const EXD_USER_URL = EXD_URL + 'users'
 const EXD_EXPENSES_URL = EXD_URL + 'expenses'
 const EXD_EXPENSE_URL = EXD_URL + 'expense/%expenseId%'
 
@@ -13,6 +14,26 @@ export default {
   login: (context, credentials) => {
     return new Promise((resolve, reject) => {
       axios.post(EXD_AUTH_URL, {
+        ...credentials
+      })
+        .then((response) => {
+          let email = response.data.email
+          let userId = response.data.user_id
+          context.commit('login', {
+            email: email,
+            userId: userId
+          })
+          resolve()
+        })
+        .catch((err) => {
+          reject(err.response.data.message)
+        })
+    })
+  },
+
+  register: (context, credentials) => {
+    return new Promise((resolve, reject) => {
+      axios.post(EXD_USER_URL, {
         ...credentials
       })
         .then((response) => {

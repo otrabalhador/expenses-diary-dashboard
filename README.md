@@ -1,6 +1,25 @@
-# expenses-diary-dashboard
+# Expenses Diary Dashboard
 
-> A Vue.js project
+This dashboard integrates with [expenses-diary-api][expenses-diary-api].
+
+[Demo][Demo]
+
+## ROADMAP for V1:
+
+### Main
+
+    [ ] JWT
+    [ ] Integrate Category and Payment Origin
+    [ ] Implement options for start template (category/payment_origin) for user to start
+    [ ] Implement option to edit template (category/payment_origin)
+    [ ] Screen with expenses overview
+
+### Secondary
+
+    [ ] Block create/edit button when pressed
+    [ ] Loading effect doesn't change the layout of the screen
+    [ ] Prettier forms
+
 
 ## Build Setup
 
@@ -19,3 +38,7 @@ npm run build --report
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+[expenses-diary-api]: https://github.com/otrabalhador/expenses-diary-api
+[Demo]: https://expenses-diary.herokuapp.com/#/

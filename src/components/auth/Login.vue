@@ -67,40 +67,5 @@ export default {
 
 <style scoped lang='scss'>
 
-  // Forms
-
-  form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    * {
-      margin-top: 20px;
-    }
-  }
-
-  .form-group {
-
-    display: grid;
-    grid-template-areas: 'label . input';
-    grid-template-columns: 1fr 20px 3fr;
-    align-items: center;
-
-
-    .form-label {
-      grid-area: label;
-      justify-self: right;
-      font-weight: bold;
-    }
-
-    .form-input {
-      grid-area: input;
-      background-color: transparent;
-      border-bottom: 2px solid black;
-      padding-left: 10px; 
-      height: 2em;
-    }
-  }
 
 </style>

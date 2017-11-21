@@ -4,7 +4,7 @@ This dashboard integrates with [expenses-diary-api][expenses-diary-api].
 
 [Demo][Demo]
 
-## ROADMAP for V1:
+## ROADMAP to V1:
 
 ### Main
 

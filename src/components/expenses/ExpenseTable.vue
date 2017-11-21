@@ -17,7 +17,7 @@
         <!-- Content -->
         <template v-for="(row, rowNumber) in data">
           <div class='-table-cell' :class="{'-table-cell-even': isEven(rowNumber)}" v-for="column in computedColumns">
-            {{row[column['field']]}}
+            {{resolve_object(column.field, row)}}
           </div>
 
         <div class='-table-cell -table-rbar-cell' :class="{'-table-cell-even': isEven(rowNumber)}">
@@ -112,6 +112,14 @@ export default {
             text: err
           })
         })
+    },
+    resolve_object (path, obj) {
+      console.log(path)
+      console.log(obj)
+      return path.split('.')
+        .reduce((prev, curr) => {
+          return prev ? prev[curr] : undefined
+        }, obj || self)
     }
   },
   computed: {

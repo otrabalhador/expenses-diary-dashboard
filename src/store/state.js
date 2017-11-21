@@ -24,7 +24,7 @@ export default {
     },
     {
       label: 'Payment Origin',
-      field: 'payment_origin_id'
+      field: 'payment_origin.abbreviation'
     },
     {
       label: 'Regreted',

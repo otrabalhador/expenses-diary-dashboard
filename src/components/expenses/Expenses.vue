@@ -1,12 +1,12 @@
 <template>
   <div id="expenses">
     <loading v-show="loading" :msg="loading.msg"></loading>
-    <new-expense></new-expense>
+    <expense-modal></expense-modal>
 
     <div class="-fixed-right">
-    <button class='-btn -btn-icon' @click="newExpense">
-      <icon name="plus" scale="2"></icon>
-    </button>
+      <button class='-btn -btn-icon' @click="newExpense">
+        <icon name="plus" scale="2"></icon>
+      </button>
     </div>
     
     <expense-table
@@ -20,7 +20,7 @@
 
 <script>
   import ExpenseTable from '@/components/expenses/ExpenseTable'
-  import NewExpense from '@/components/expenses/NewExpense'
+  import ExpenseModal from '@/components/expenses/ExpenseModal'
   import Loading from '@/components/loading/Loading'
   import { mapGetters } from 'vuex'
 
@@ -77,7 +77,7 @@
       'totalExpenses',
       'totalExpensesAmount'
     ]),
-    components: { ExpenseTable, NewExpense, Loading }
+    components: { ExpenseTable, ExpenseModal, Loading }
   }
 </script>
 

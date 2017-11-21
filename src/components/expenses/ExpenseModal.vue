@@ -1,5 +1,5 @@
 <template>
-  <div id="new-expense">
+  <div id="expense-modal">
     <modal 
       name="expense-form"
       :width="400"
@@ -116,7 +116,7 @@
 <script>
 import Loading from '@/components/loading/Loading'
 export default {
-  name: 'new-expense',
+  name: 'expense-modal',
   data () {
     return {
       loading: false,

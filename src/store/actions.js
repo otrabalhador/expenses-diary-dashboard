@@ -90,9 +90,9 @@ export default {
 
     return new Promise((resolve, reject) => {
       axios.patch(expenseUrl, {
-        payment_origin_id: expense.payment_origin_id,
-        category_id: expense.category_id,
-        reference_date: expense.reference_date,
+        paymentOriginId: expense.paymentOriginId,
+        categoryId: expense.categoryId,
+        referenceDate: expense.referenceDate,
         description: expense.description,
         amount: expense.amount,
         regreted: expense.regreted,

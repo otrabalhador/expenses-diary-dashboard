@@ -2,15 +2,14 @@
   <div id="expense-modal">
     <modal 
       name="expense-form"
-      :width="400"
-      :height="600"
+      :width="modalWidth"
+      :height="modalHeight"
       @before-open="beforeOpen"
       >
 
       <loading v-show="loading" :msg="loading.msg"></loading>
 
-      <div class='-wrapper-vertical'>
-
+      <div class='-wrapper-vertical' :style="{ 'max-width': modalWidth + 'px' }">
 
       <form>
 
@@ -23,7 +22,8 @@
             id="referenceDate" 
             type="date" 
             placeholder="Date" 
-            class="form-input" 
+            class="form-input"
+            :value="expense.reference_date"
             v-model="expense.referenceDate">
         </div>
 
@@ -53,16 +53,19 @@
         </div>
 
         <div class="form-group">
-          <label for="paymentOriginId" class="control-label">
-            Payment Origin
-          </label>
-          <input
-            id="paymentOriginId" 
-            type="number"
-            placeholder="Payment Origin Id" 
-            class="form-input" 
+          <label for="paymentOrigin">Payment Origin</label>
+          <select 
+            class="form-select" 
+            id="paymentOrigin"
             v-model="expense.paymentOriginId">
+            <option
+              v-for="paymentOrigin in paymentOrigins" 
+              :value="paymentOrigin.id">
+              {{paymentOrigin.abbreviation}}
+            </option>
+          </select>
         </div>
+
 
         <div class="form-group">
           <label for="regreted" class="control-label">
@@ -114,90 +117,101 @@
 </template>
 
 <script>
-import Loading from '@/components/loading/Loading'
-export default {
-  name: 'expense-modal',
-  data () {
-    return {
-      loading: false,
-      expense: {},
-      emptyExpense: {
-        referenceDate: null,
-        description: null,
-        categoryId: 1,
-        paymentOriginId: null,
-        regreted: null,
-        amount: null
-      },
-      newExpenseModal: true
-    }
-  },
-  methods: {
-    beforeOpen (event) {
-      if (event.params) {
-        this.newExpenseModal = false
-        if (event.params.expense) {
-          this.expense = event.params.expense
-        } else {
-          this.expense = this.emptyExpense
-          this.newExpenseModal = true
-        }
-      } else {
-        if (!this.newExpenseModal) {
-          this.newExpenseModal = true
-          this.expense = this.emptyExpense
-        }
+  import Loading from '@/components/loading/Loading'
+  import { mapGetters } from 'vuex'
+
+  export default {
+    name: 'expense-modal',
+    data () {
+      return {
+        modalHeight: 600,
+        modalWidth: 400,
+
+        loading: false,
+
+        emptyExpense: {
+          referenceDate: null,
+          description: null,
+          categoryId: null,
+          paymentOriginId: null,
+          regreted: null,
+          amount: null
+        },
+
+        expense: {},
+        newExpenseModal: true
       }
     },
-    newExpense () {
-      this.loading = { msg: 'Creating new expense' }
-      this.$store.dispatch('newExpense', this.expense)
-        .then((message) => {
-          this.loading = false
-          this.$notify({
-            type: 'info',
-            group: 'info',
-            title: 'Expense',
-            text: message
-          })
-          this.$modal.hide('expense-form')
-        })
-        .catch((err) => {
-          this.loading = false
-          this.$notify({
-            type: 'error',
-            group: 'error',
-            title: 'Expense',
-            text: err
-          })
-        })
+    mounted () {
+      this.expense = this.emptyExpense
     },
-    editExpense (expense) {
-      this.loading = { msg: 'Editing expense' }
-      this.$store.dispatch('editExpense', this.expense)
-        .then((message) => {
-          this.loading = false
-          this.$notify({
-            type: 'info',
-            group: 'info',
-            title: 'Expense',
-            text: message
+    methods: {
+      beforeOpen (event) {
+        if (event.params) {
+          this.newExpenseModal = false
+          if (event.params.expense) {
+            this.expense = event.params.expense
+          } else {
+            this.expense = this.emptyExpense
+            this.newExpenseModal = true
+          }
+        } else {
+          if (!this.newExpenseModal) {
+            this.newExpenseModal = true
+            this.expense = this.emptyExpense
+          }
+        }
+      },
+      newExpense () {
+        this.loading = { msg: 'Creating new expense' }
+        this.$store.dispatch('newExpense', this.expense)
+          .then((message) => {
+            this.loading = false
+            this.$notify({
+              type: 'info',
+              group: 'info',
+              title: 'Expense',
+              text: message
+            })
+            this.$modal.hide('expense-form')
           })
-          this.$modal.hide('expense-form')
-        })
-        .catch((err) => {
-          this.loading = false
-          this.$notify({
-            type: 'error',
-            group: 'error',
-            title: 'Expense',
-            text: err
+          .catch((err) => {
+            this.loading = false
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Expense',
+              text: err
+            })
           })
-        })
-    }
-  },
-  components: { Loading }
-}
+      },
+      editExpense (expense) {
+        this.loading = { msg: 'Editing expense' }
+        this.$store.dispatch('editExpense', this.expense)
+          .then((message) => {
+            this.loading = false
+            this.$notify({
+              type: 'info',
+              group: 'info',
+              title: 'Expense',
+              text: message
+            })
+            this.$modal.hide('expense-form')
+          })
+          .catch((err) => {
+            this.loading = false
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Expense',
+              text: err
+            })
+          })
+      }
+    },
+    computed: mapGetters(['paymentOrigins']),
+    components: { Loading }
+  }
 </script>
 
 <style scoped lang="scss">

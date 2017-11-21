@@ -20,6 +20,11 @@ export default {
     state.totalExpenses = expenses.total
   },
 
+  fetchPaymentOrigins: (state, paymentOrigins) => {
+    Vue.set(state, 'paymentOrigins', paymentOrigins.content)
+    state.totalPaymentOrigins = paymentOrigins.total
+  },
+
   newExpense: (state, expense) => {
     state.expenses.push(expense)
   },

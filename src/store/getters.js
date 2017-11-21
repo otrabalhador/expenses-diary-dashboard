@@ -12,5 +12,8 @@ export default {
   totalExpenses: state => state.totalExpenses,
   columns: state => state.columns,
   expenses: state => state.expenses,
-  totalExpensesAmount: state => 0
+  totalExpensesAmount: state => 0,
+
+  paymentOrigins: state => state.paymentOrigins,
+  totalPaymentOrigins: state => state.totalPaymentOrigins
 }

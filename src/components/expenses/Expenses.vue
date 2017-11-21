@@ -34,21 +34,39 @@
       }
     },
     created () {
-      this.$store.dispatch('fetchExpenses')
-        .then(() => {
-          this.loading = false
-        })
-        .catch((err) => {
-          this.loading = false
-
-          this.$notify({
-            type: 'error',
-            group: 'error',
-            text: err
-          })
-        })
+      this.fetchData()
     },
     methods: {
+      fetchData () {
+        this.fetchExpenses()
+        this.fetchPaymentOrigin()
+      },
+      fetchExpenses () {
+        this.$store.dispatch('fetchExpenses')
+          .then(() => {
+            this.loading = false
+          })
+          .catch((err) => {
+            this.loading = false
+  
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              text: err
+            })
+          })
+      },
+      fetchPaymentOrigin () {
+        this.$store.dispatch('fetchPaymentOrigins')
+          .catch((err) => {
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Error in fetch payment origins background process',
+              text: err
+            })
+          })
+      },
       newExpense () {
         this.$modal.show('expense-form')
       }

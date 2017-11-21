@@ -114,8 +114,6 @@ export default {
         })
     },
     resolve_object (path, obj) {
-      console.log(path)
-      console.log(obj)
       return path.split('.')
         .reduce((prev, curr) => {
           return prev ? prev[curr] : undefined

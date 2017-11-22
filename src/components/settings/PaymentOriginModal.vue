@@ -105,57 +105,57 @@
             this.newPaymentOriginModal = true
           }
         } else {
-          if (!this.newExpenseModal) {
+          if (!this.newPaymentOriginModal) {
             this.newPaymentOriginModal = true
             this.paymentOrigin = this.emptyPaymentOrigin
           }
         }
       },
       newPaymentOrigin () {
-        this.loading = { msg: 'Creating new expense' }
-        // this.$store.dispatch('newPaymentOrigin', this.paymentOrigin)
-        //   .then((message) => {
-        //     this.loading = false
-        //     this.$notify({
-        //       type: 'info',
-        //       group: 'info',
-        //       title: 'Expense',
-        //       text: message
-        //     })
-        //     this.$modal.hide('expense-form')
-        //   })
-        //   .catch((err) => {
-        //     this.loading = false
-        //     this.$notify({
-        //       type: 'error',
-        //       group: 'error',
-        //       title: 'Expense',
-        //       text: err
-        //     })
-        //   })
+        this.loading = { msg: 'Creating new payment origin' }
+        this.$store.dispatch('newPaymentOrigin', this.paymentOrigin)
+          .then((message) => {
+            this.loading = false
+            this.$notify({
+              type: 'info',
+              group: 'info',
+              title: 'Payment Origin',
+              text: message
+            })
+            this.$modal.hide('payment-origin-form')
+          })
+          .catch((err) => {
+            this.loading = false
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Payment Origin',
+              text: err
+            })
+          })
       },
       editPaymentOrigin (data) {
-        this.loading = { msg: 'Editing Payment Origin' }
-        // this.$store.dispatch('editPaymentOrigin', this.paymentOrigin)
-          // .then((message) => {
-          //   this.loading = false
-          //   this.$notify({
-          //     type: 'info',
-          //     group: 'info',
-          //     title: 'Expense',
-          //     text: message
-          //   })
-          //   this.$modal.hide('payment-origin-form')
-          // })
-          // .catch((err) => {
-          //   this.loading = false
-          //   this.$notify({
-          //     type: 'error',
-          //     group: 'error',
-          //     title: 'Expense',
-          //     text: err
-          //   })
-          // })
+        this.loading = { msg: 'Editing payment origin' }
+        this.$store.dispatch('editPaymentOrigin', this.paymentOrigin)
+          .then((message) => {
+            this.loading = false
+            this.$notify({
+              type: 'info',
+              group: 'info',
+              title: 'Payment Origin',
+              text: message
+            })
+            this.$modal.hide('payment-origin-form')
+          })
+          .catch((err) => {
+            this.loading = false
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Payment Origin',
+              text: err
+            })
+          })
       }
     },
     components: { Loading }

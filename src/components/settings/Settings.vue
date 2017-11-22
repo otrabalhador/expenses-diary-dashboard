@@ -27,16 +27,24 @@
 
   .-settings {
     display: grid;
-    grid-template-areas: 'payment-origin sep category';
-    grid-template-columns: '1fr 2vw 1fr';
+    grid-template-areas: 'payment sep category';
+    grid-template-columns: 1fr 2vw 1fr;
     justify-items: center;
 
     .payment-origin {
-      grid-area: payment-origin;
+      grid-area: payment;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
 
     .category {
       grid-area: category;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
 
     .sep {

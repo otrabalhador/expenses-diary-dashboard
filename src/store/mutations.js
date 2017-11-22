@@ -20,16 +20,6 @@ export default {
     state.totalExpenses = expenses.total
   },
 
-  fetchPaymentOrigins: (state, paymentOrigins) => {
-    Vue.set(state, 'paymentOrigins', paymentOrigins.content)
-    state.totalPaymentOrigins = paymentOrigins.total
-  },
-
-  fetchCategories: (state, categories) => {
-    Vue.set(state, 'categories', categories.content)
-    state.totalCategories = categories.total
-  },
-
   newExpense: (state, expense) => {
     state.expenses.push(expense)
   },
@@ -42,10 +32,34 @@ export default {
 
   deleteExpense: (state, expenseId) => {
     let index = state.expenses.map((el) => el.id).indexOf(expenseId)
-    // state.expenses = state.expenses.filter(el => {
-    //   el.id !== expenseId
-    // })
     Vue.delete(state.expenses, index)
-    // state.expenses.splice(index, 1)
+  },
+
+  // Payment Origin
+  fetchPaymentOrigins: (state, paymentOrigins) => {
+    Vue.set(state, 'paymentOrigins', paymentOrigins.content)
+    state.totalPaymentOrigins = paymentOrigins.total
+  },
+
+  newPaymentOrigin: (state, paymentOrigin) => {
+    state.paymentOrigins.push(paymentOrigin)
+  },
+
+  editPaymentOrigin: (state, paymentOrigin) => {
+    let index = state.paymentOrigins.map((el) => el.id).indexOf(paymentOrigin.id)
+    state.paymentOrigins.splice(index, 1)
+    state.paymentOrigins.splice(index, 0, paymentOrigin)
+  },
+
+  deletePaymentOrigin: (state, paymentOriginId) => {
+    let index = state.paymentOrigins.map((el) => el.id).indexOf(paymentOriginId)
+    Vue.delete(state.paymentOrigins, index)
+  },
+
+  // Category
+  fetchCategories: (state, categories) => {
+    Vue.set(state, 'categories', categories.content)
+    state.totalCategories = categories.total
   }
+
 }

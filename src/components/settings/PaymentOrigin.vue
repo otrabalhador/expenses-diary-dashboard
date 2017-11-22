@@ -1,12 +1,20 @@
 <template>
   <div id="payment-origin">
+    <div class="-wrapper">
+      <h1>Payment Origin</h1>
+      <button class='-btn -btn-icon' @click="newPaymentOrigin">
+        <icon name="plus" scale="2"></icon>
+      </button>
+    </div>
+
+    
     <loading v-show="loading" :msg="loading.msg"></loading>
 
     <payment-origin-modal></payment-origin-modal>
     <table-component
       :data="paymentOrigins"
       :columns="paymentOriginColumns"
-      modal="payment-origin-form"
+      :modal="paymentOriginModalName"
       :onDelete="deletePaymentOrigin"
     >
     </table-component>
@@ -24,7 +32,8 @@
     name: 'payment-origin',
     data () {
       return {
-        loading: false
+        loading: false,
+        paymentOriginModalName: 'payment-origin-form'
       }
     },
     created () {
@@ -33,6 +42,9 @@
       }
     },
     methods: {
+      newPaymentOrigin () {
+        this.$modal.show(this.paymentOriginModalName)
+      },
       fetchPaymentOrigins () {
         this.loading = {
           msg: 'Fetching Payment Origins'
@@ -48,8 +60,27 @@
             })
           })
       },
-      deletePaymentOrigin () {
-        console.log('deleting...')
+      deletePaymentOrigin (expense) {
+        this.loading = { msg: 'Removing payment origin' }
+        this.$store.dispatch('deletePaymentOrigin', expense.id)
+          .then((message) => {
+            this.loading = false
+            this.$notify({
+              type: 'info',
+              group: 'info',
+              title: 'Payment Origin',
+              text: message
+            })
+          })
+          .catch((err) => {
+            this.loading = false
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Payment Origin',
+              text: err
+            })
+          })
       }
     },
     computed: mapGetters(['paymentOrigins', 'paymentOriginColumns']),

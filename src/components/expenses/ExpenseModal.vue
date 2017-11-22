@@ -176,8 +176,8 @@
       beforeOpen (event) {
         if (event.params) {
           this.newExpenseModal = false
-          if (event.params.expense) {
-            this.expense = event.params.expense
+          if (event.params.data) {
+            this.expense = event.params.data
           } else {
             this.expense = this.emptyExpense
             this.newExpenseModal = true

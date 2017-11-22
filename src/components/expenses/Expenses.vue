@@ -9,19 +9,19 @@
       </button>
     </div>
     
-    <expense-table
+    <table-component
       :data="expenses"
       :columns="columns"
       modal="expense-form"
       :onDelete="deleteExpense"
     >
-    </expense-table>
+    </table-component>
 
   </div>
 </template>
 
 <script>
-  import ExpenseTable from '@/components/expenses/ExpenseTable'
+  import TableComponent from '@/components/table/TableComponent'
   import ExpenseModal from '@/components/expenses/ExpenseModal'
   import Loading from '@/components/loading/Loading'
   import { mapGetters } from 'vuex'
@@ -113,7 +113,7 @@
       'totalExpenses',
       'totalExpensesAmount'
     ]),
-    components: { ExpenseTable, ExpenseModal, Loading }
+    components: { TableComponent, ExpenseModal, Loading }
   }
 </script>
 

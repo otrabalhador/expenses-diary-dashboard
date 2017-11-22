@@ -1,8 +1,6 @@
 <template>
   <div id="table">
   
-    <loading v-if="loading" :msg="loading.msg"></loading>
-
     <div class="-wrap-table">
       
       <div class="-table" :class="columnClass">
@@ -22,7 +20,7 @@
 
         <div class='-table-cell -table-rbar-cell' :class="{'-table-cell-even': isEven(rowNumber)}">
           
-          <button class='-btn -btn-icon-sm -btn-blue' @click="editExpense(row)">
+          <button class='-btn -btn-icon-sm -btn-blue' @click="editRow(row)">
             <icon name="edit" scale="1"></icon>
           </button>      
 
@@ -41,7 +39,6 @@
 </template>
 
 <script>
-import Loading from '@/components/loading/Loading'
 export default {
   name: 'table',
   props: {
@@ -69,33 +66,28 @@ export default {
       type: Function
     }
   },
-  data () {
-    return {
-      loading: null
-    }
-  },
   methods: {
-    isEven (value) {
-      return value % 2 !== 0
+    editRow (row) {
+      this.$modal.show(this.modal, { data: row })
     },
-    editExpense (expense) {
-      this.$modal.show(this.modal, { expense: expense })
-    },
-    confirmDeletion (expense) {
+    confirmDeletion (row) {
       this.$modal.show('dialog', {
-        title: 'Deleting expense...',
+        title: 'Deleting row...',
         text: 'Are you sure you want to delete this row?',
         buttons: [
           { title: 'Cancel' },
           {
             title: 'Yes',
             handler: () => {
-              this.onDelete(expense)
+              this.onDelete(row)
               this.$modal.hide('dialog')
             }
           }
         ]
       })
+    },
+    isEven (value) {
+      return value % 2 !== 0
     },
     resolve_object (path, obj) {
       return path.split('.')
@@ -122,8 +114,7 @@ export default {
       let className = '-table--%colN%cols'
       return className.replace(/%colN%/g, colN)
     }
-  },
-  components: { Loading }
+  }
 }
 </script>
 

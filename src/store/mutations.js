@@ -25,6 +25,11 @@ export default {
     state.totalPaymentOrigins = paymentOrigins.total
   },
 
+  fetchCategories: (state, categories) => {
+    Vue.set(state, 'categories', categories.content)
+    state.totalCategories = categories.total
+  },
+
   newExpense: (state, expense) => {
     state.expenses.push(expense)
   },

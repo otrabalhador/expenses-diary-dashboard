@@ -20,7 +20,7 @@ export default {
     },
     {
       label: 'Category',
-      field: 'categoryId'
+      field: 'category.name'
     },
     {
       label: 'Payment Origin',
@@ -42,5 +42,8 @@ export default {
   expenses: [{}],
 
   totalPaymentOrigins: 0,
-  paymentOrigins: [{}]
+  paymentOrigins: [{}],
+
+  totalCategories: 0,
+  categories: [{}]
 }

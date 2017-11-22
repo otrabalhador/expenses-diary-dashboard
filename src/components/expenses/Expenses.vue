@@ -39,7 +39,8 @@
     methods: {
       fetchData () {
         this.fetchExpenses()
-        this.fetchPaymentOrigin()
+        this.fetchPaymentOrigins()
+        this.fetchCategories()
       },
       fetchExpenses () {
         this.$store.dispatch('fetchExpenses')
@@ -56,13 +57,24 @@
             })
           })
       },
-      fetchPaymentOrigin () {
+      fetchPaymentOrigins () {
         this.$store.dispatch('fetchPaymentOrigins')
           .catch((err) => {
             this.$notify({
               type: 'error',
               group: 'error',
               title: 'Error in fetch payment origins background process',
+              text: err
+            })
+          })
+      },
+      fetchCategories () {
+        this.$store.dispatch('fetchCategories')
+          .catch((err) => {
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Error in fetch categories background process',
               text: err
             })
           })

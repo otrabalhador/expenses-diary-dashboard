@@ -40,16 +40,19 @@
 
 
         <div class="form-group">
-          <label for="category" class="control-label">
-            Category
-          </label>
-          <input
-            id="category" 
-            type="number"
-            placeholder="category id" 
-            class="form-input" 
+          <label for="category">Category</label>
+          <select 
+            class="form-select" 
+            id="category"
             v-model="expense.categoryId">
+            <option
+              v-for="category in categories" 
+              :value="category.id">
+              {{category.name}}
+            </option>
+          </select>
         </div>
+
 
         <div class="form-group">
           <label for="paymentOrigin">Payment Origin</label>
@@ -64,6 +67,7 @@
             </option>
           </select>
         </div>
+
 
 
         <div class="form-group">
@@ -141,6 +145,18 @@
       }
     },
     watch: {
+
+      // To keep reactivity when user changes category
+      'expense.categoryId': function (categoryId, oldCategoryId) {
+        if (oldCategoryId) {
+          // Find the index of selected categoryId
+          let index = this.categories.map((el) => el.id).indexOf(categoryId)
+
+          // Set expense object to contain the select category object
+          this.$set(this.expense, 'category', this.categories[index])
+        }
+      },
+
       // To keep reactivity when user changes paymentOrigin
       'expense.paymentOriginId': function (paymentOriginId, oldPaymentOriginId) {
         if (oldPaymentOriginId) {
@@ -151,6 +167,7 @@
           this.$set(this.expense, 'paymentOrigin', this.paymentOrigins[index])
         }
       }
+
     },
     mounted () {
       this.expense = this.emptyExpense
@@ -219,7 +236,7 @@
           })
       }
     },
-    computed: mapGetters(['paymentOrigins']),
+    computed: mapGetters(['categories', 'paymentOrigins']),
     components: { Loading }
   }
 </script>

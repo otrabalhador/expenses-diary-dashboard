@@ -6,6 +6,7 @@ const EXD_USER_URL = EXD_URL + 'users'
 const EXD_EXPENSES_URL = EXD_URL + 'expenses'
 const EXD_EXPENSE_URL = EXD_URL + 'expense/%expenseId%'
 const EXD_PAYMENT_ORIGINS_URL = EXD_URL + 'payment-origins'
+const EXD_CATEGORIES_URL = EXD_URL + 'categories'
 
 function singleExpenseUrl (expenseId) {
   return EXD_EXPENSE_URL.replace(/%expenseId%/g, expenseId)
@@ -135,6 +136,22 @@ export default {
       })
         .then((response) => {
           context.commit('fetchPaymentOrigins', response.data)
+          resolve()
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  },
+
+  // Category
+  fetchCategories: (context) => {
+    return new Promise((resolve, reject) => {
+      axios.get(EXD_CATEGORIES_URL, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('fetchCategories', response.data)
           resolve()
         })
         .catch((err) => {

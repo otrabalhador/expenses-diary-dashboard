@@ -6,7 +6,7 @@ export default {
   columns: [
     {
       label: 'Date',
-      field: 'reference_date',
+      field: 'referenceDate',
       type: 'date',
       filterable: true,
       inputFormat: 'YYYY-MM-DD',
@@ -20,11 +20,11 @@ export default {
     },
     {
       label: 'Category',
-      field: 'category_id'
+      field: 'category.name'
     },
     {
       label: 'Payment Origin',
-      field: 'payment_origin_id'
+      field: 'paymentOrigin.abbreviation'
     },
     {
       label: 'Regreted',
@@ -39,5 +39,11 @@ export default {
   ],
 
   totalExpenses: 0,
-  expenses: [{}]
+  expenses: [{}],
+
+  totalPaymentOrigins: 0,
+  paymentOrigins: [{}],
+
+  totalCategories: 0,
+  categories: [{}]
 }

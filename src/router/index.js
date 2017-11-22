@@ -7,6 +7,7 @@ import Login from '@/components/auth/Login'
 import Register from '@/components/auth/Register'
 
 import Expenses from '@/components/expenses/Expenses'
+import Settings from '@/components/settings/Settings'
 
 Vue.use(Router)
 
@@ -29,6 +30,10 @@ export default new Router({
     {
       ...routeDetails.expenses,
       component: Expenses
+    },
+    {
+      ...routeDetails.settings,
+      component: Settings
     }
   ]
 })

@@ -9,13 +9,14 @@ This dashboard integrates with [expenses-diary-api][expenses-diary-api].
 ### Main
 
     [ ] JWT
-    [ ] Integrate Category and Payment Origin
+    [X] Integrate Category and Payment Origin
     [ ] Implement options for start template (category/payment_origin) for user to start
     [ ] Implement option to edit template (category/payment_origin)
     [ ] Screen with expenses overview
 
 ### Secondary
 
+    [ ] Format table data to specific type
     [ ] Block create/edit button when pressed
     [ ] Loading effect doesn't change the layout of the screen
     [ ] Prettier forms

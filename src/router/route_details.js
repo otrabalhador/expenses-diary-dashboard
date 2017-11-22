@@ -22,6 +22,14 @@ const privateRoutes = {
     meta: {
       private: true
     }
+  },
+
+  settings: {
+    path: '/settings',
+    name: 'Settings',
+    meta: {
+      private: true
+    }
   }
 }
 

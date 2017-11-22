@@ -18,8 +18,10 @@ This dashboard integrates with [expenses-diary-api][expenses-diary-api].
 
     [ ] Format table data to specific type
     [ ] Block create/edit button when pressed
-    [ ] Loading effect doesn't change the layout of the screen
+    [ ] Find a better place to put loading snipper
     [ ] Prettier forms
+    [ ] Only create when there is data
+    [ ] Only edit when there is editted info
 
 
 ## Build Setup

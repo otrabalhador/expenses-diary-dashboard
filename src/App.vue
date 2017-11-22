@@ -55,16 +55,10 @@ export default {
   }
 
   .-wrapper-vertical {
-    align-items: center;
-
-    width: $size-width;
-    left: $left-width;
-    position: relative;
-
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
-
   }
 
   .-fixed-right {

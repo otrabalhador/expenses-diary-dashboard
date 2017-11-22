@@ -61,6 +61,12 @@ export default {
       default () {
         return null
       }
+    },
+    modal: {
+      type: String
+    },
+    onDelete: {
+      type: Function
     }
   },
   data () {
@@ -73,45 +79,23 @@ export default {
       return value % 2 !== 0
     },
     editExpense (expense) {
-      this.$modal.show('expense-form', { expense: expense })
+      this.$modal.show(this.modal, { expense: expense })
     },
     confirmDeletion (expense) {
       this.$modal.show('dialog', {
         title: 'Deleting expense...',
-        text: 'Are you sure you want to delete this expense?',
+        text: 'Are you sure you want to delete this row?',
         buttons: [
           { title: 'Cancel' },
           {
             title: 'Yes',
             handler: () => {
-              this.deleteExpense(expense)
+              this.onDelete(expense)
               this.$modal.hide('dialog')
             }
           }
         ]
       })
-    },
-    deleteExpense (expense) {
-      this.loading = { msg: 'Removing expense' }
-      this.$store.dispatch('deleteExpense', expense.id)
-        .then((message) => {
-          this.loading = false
-          this.$notify({
-            type: 'info',
-            group: 'info',
-            title: 'Expense',
-            text: message
-          })
-        })
-        .catch((err) => {
-          this.loading = false
-          this.$notify({
-            type: 'error',
-            group: 'error',
-            title: 'Expense',
-            text: err
-          })
-        })
     },
     resolve_object (path, obj) {
       return path.split('.')
@@ -221,7 +205,6 @@ export default {
   .-table--11cols > .-table-cell  { width: (100% - $rbar-width)/11 }
   .-table--12cols > .-table-cell  { width: (100% - $rbar-width)/12 }
   .-table--13cols > .-table-cell  { width: (100% - $rbar-width)/13 }
-
 
 </style>
 

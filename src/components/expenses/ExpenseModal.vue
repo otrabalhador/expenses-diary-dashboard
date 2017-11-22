@@ -9,7 +9,7 @@
 
       <loading v-show="loading" :msg="loading.msg"></loading>
 
-      <div class='-wrapper-vertical' :style="{ 'max-width': modalWidth + 'px' }">
+      <div class='-wrapper-vertical -limit-size' :style="{ 'max-width': modalWidth + 'px' }">
 
       <form>
 
@@ -242,7 +242,7 @@
 </script>
 
 <style scoped lang="scss">
-
+  @import '../../sass/_variables';
 
   .-wrapper-modal {
     position: absolute;
@@ -261,5 +261,12 @@
   .-btn {
     border-radius: 0;
   }
+
+  .-limit-size {
+    width: $size-width;
+    left: $left-width;
+    position: relative;
+  }
+
 
 </style>

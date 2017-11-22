@@ -5,6 +5,8 @@ const EXD_AUTH_URL = EXD_URL + 'login'
 const EXD_USER_URL = EXD_URL + 'users'
 const EXD_EXPENSES_URL = EXD_URL + 'expenses'
 const EXD_EXPENSE_URL = EXD_URL + 'expense/%expenseId%'
+const EXD_PAYMENT_ORIGINS_URL = EXD_URL + 'payment-origins'
+const EXD_CATEGORIES_URL = EXD_URL + 'categories'
 
 function singleExpenseUrl (expenseId) {
   return EXD_EXPENSE_URL.replace(/%expenseId%/g, expenseId)
@@ -89,9 +91,9 @@ export default {
 
     return new Promise((resolve, reject) => {
       axios.patch(expenseUrl, {
-        payment_origin_id: expense.payment_origin_id,
-        category_id: expense.category_id,
-        reference_date: expense.reference_date,
+        paymentOriginId: expense.paymentOriginId,
+        categoryId: expense.categoryId,
+        referenceDate: expense.referenceDate,
         description: expense.description,
         amount: expense.amount,
         regreted: expense.regreted,
@@ -119,6 +121,38 @@ export default {
         .then((response) => {
           context.commit('deleteExpense', expenseId)
           resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  },
+
+  // Payment Origin
+  fetchPaymentOrigins: (context) => {
+    return new Promise((resolve, reject) => {
+      axios.get(EXD_PAYMENT_ORIGINS_URL, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('fetchPaymentOrigins', response.data)
+          resolve()
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  },
+
+  // Category
+  fetchCategories: (context) => {
+    return new Promise((resolve, reject) => {
+      axios.get(EXD_CATEGORIES_URL, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('fetchCategories', response.data)
+          resolve()
         })
         .catch((err) => {
           reject(err.response ? err.response.data.message : 'Server is indisponible')

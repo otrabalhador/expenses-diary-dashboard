@@ -3,7 +3,7 @@
     <div class="-navigation-bar">
       <div class="-brand">
         <router-link class="link" to="/">
-          <img class="-brand" src="/static/img/icons/favicon.ico"/>
+          <h3>Home</h3>
         </router-link>
       </div>
       <ul class="-left-to-right">

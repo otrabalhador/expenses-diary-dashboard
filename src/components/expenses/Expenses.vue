@@ -1,12 +1,12 @@
 <template>
   <div id="expenses">
     <loading v-show="loading" :msg="loading.msg"></loading>
-    <new-expense></new-expense>
+    <expense-modal></expense-modal>
 
     <div class="-fixed-right">
-    <button class='-btn -btn-icon' @click="newExpense">
-      <icon name="plus" scale="2"></icon>
-    </button>
+      <button class='-btn -btn-icon' @click="newExpense">
+        <icon name="plus" scale="2"></icon>
+      </button>
     </div>
     
     <expense-table
@@ -20,7 +20,7 @@
 
 <script>
   import ExpenseTable from '@/components/expenses/ExpenseTable'
-  import NewExpense from '@/components/expenses/NewExpense'
+  import ExpenseModal from '@/components/expenses/ExpenseModal'
   import Loading from '@/components/loading/Loading'
   import { mapGetters } from 'vuex'
 
@@ -34,21 +34,51 @@
       }
     },
     created () {
-      this.$store.dispatch('fetchExpenses')
-        .then(() => {
-          this.loading = false
-        })
-        .catch((err) => {
-          this.loading = false
-
-          this.$notify({
-            type: 'error',
-            group: 'error',
-            text: err
-          })
-        })
+      this.fetchData()
     },
     methods: {
+      fetchData () {
+        this.fetchExpenses()
+        this.fetchPaymentOrigins()
+        this.fetchCategories()
+      },
+      fetchExpenses () {
+        this.$store.dispatch('fetchExpenses')
+          .then(() => {
+            this.loading = false
+          })
+          .catch((err) => {
+            this.loading = false
+  
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              text: err
+            })
+          })
+      },
+      fetchPaymentOrigins () {
+        this.$store.dispatch('fetchPaymentOrigins')
+          .catch((err) => {
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Error in fetch payment origins background process',
+              text: err
+            })
+          })
+      },
+      fetchCategories () {
+        this.$store.dispatch('fetchCategories')
+          .catch((err) => {
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Error in fetch categories background process',
+              text: err
+            })
+          })
+      },
       newExpense () {
         this.$modal.show('expense-form')
       }
@@ -59,7 +89,7 @@
       'totalExpenses',
       'totalExpensesAmount'
     ]),
-    components: { ExpenseTable, NewExpense, Loading }
+    components: { ExpenseTable, ExpenseModal, Loading }
   }
 </script>
 

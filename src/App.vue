@@ -61,6 +61,26 @@ export default {
     justify-content: center;
   }
 
+  .-wrapper-modal {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    * {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  .-limit-size {
+    width: $size-width;
+    left: $left-width;
+    position: relative;
+  }
+
   .-fixed-right {
     position: fixed;
     top: 50%;

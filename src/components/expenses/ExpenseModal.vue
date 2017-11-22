@@ -23,7 +23,6 @@
             type="date" 
             placeholder="Date" 
             class="form-input"
-            :value="expense.reference_date"
             v-model="expense.referenceDate">
         </div>
 
@@ -137,9 +136,20 @@
           regreted: null,
           amount: null
         },
-
         expense: {},
         newExpenseModal: true
+      }
+    },
+    watch: {
+      // To keep reactivity when user changes paymentOrigin
+      'expense.paymentOriginId': function (paymentOriginId, oldPaymentOriginId) {
+        if (oldPaymentOriginId) {
+          // Find the index of selected paymentOriginId
+          let index = this.paymentOrigins.map((el) => el.id).indexOf(paymentOriginId)
+
+          // Set expense object to contain the select paymentOrigin object
+          this.$set(this.expense, 'paymentOrigin', this.paymentOrigins[index])
+        }
       }
     },
     mounted () {

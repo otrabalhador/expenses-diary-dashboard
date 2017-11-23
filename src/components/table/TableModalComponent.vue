@@ -2,6 +2,7 @@
   <div id="table">
   
     <table-modal
+      :columns="columns"
       :modal="modal"
       :onEdit="onEdit"
     ></table-modal>

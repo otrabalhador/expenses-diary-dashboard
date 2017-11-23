@@ -13,38 +13,19 @@
 
       <form>
 
-        <div class="form-group">
-          <label for="name" class="control-label">
-            Name
-          </label>
-          <input 
-            id="name" 
-            placeholder="Name" 
-            class="form-input" 
-            v-model="paymentOrigin.name">
-        </div>
+        <template v-for="column in columns">
 
-        <div class="form-group">
-          <label for="description" class="control-label">
-            Description
-          </label>
-          <input 
-            id="description" 
-            placeholder="Description" 
-            class="form-input" 
-            v-model="paymentOrigin.description">
-        </div>
+          <div class="form-group">
+            <label :for="column['label']" class="control-label">
+              {{column["label"]}}
+            </label>
+            <input 
+              :id="column['label']"
+              class="form-input"
+              v-model="modalData[column.field]">
+          </div>
 
-        <div class="form-group">
-          <label for="abbreviation" class="control-label">
-            Abbreviation
-          </label>
-          <input 
-            id="abbreviation" 
-            placeholder="Abbreviation" 
-            class="form-input" 
-            v-model="paymentOrigin.abbreviation">
-        </div>
+        </template>
 
       </form>
 
@@ -61,7 +42,7 @@
           Create
         </button>
         
-        <button class='-btn -btn-no-radius' v-else @click="onEdit(paymentOrigin)">
+        <button class='-btn -btn-no-radius' v-else @click="onEdit(modalData)">
           Edit
         </button>
 
@@ -81,6 +62,9 @@
       },
       onEdit: {
         type: Function
+      },
+      columns: {
+        type: Array
       }
     },
     data () {
@@ -90,38 +74,34 @@
 
         loading: false,
 
-        emptyPaymentOrigin: {
-          description: null,
-          name: null,
-          abbreviation: null
-        },
-        paymentOrigin: {},
+        emptyPaymentOrigin: {},
+        modalData: {},
         newPaymentOriginModal: true
       }
     },
     mounted () {
-      this.paymentOrigin = this.emptyPaymentOrigin
+      this.modalData = this.emptyModalData
     },
     methods: {
       beforeOpen (event) {
         if (event.params) {
           this.newPaymentOriginModal = false
           if (event.params.data) {
-            this.paymentOrigin = event.params.data
+            this.modalData = event.params.data
           } else {
-            this.paymentOrigin = this.emptyPaymentOrigin
+            this.modalData = this.emptyModalData
             this.newPaymentOriginModal = true
           }
         } else {
           if (!this.newPaymentOriginModal) {
             this.newPaymentOriginModal = true
-            this.paymentOrigin = this.emptyPaymentOrigin
+            this.modalData = this.emptyModalData
           }
         }
       },
       newPaymentOrigin () {
         this.loading = { msg: 'Creating new payment origin' }
-        this.$store.dispatch('newPaymentOrigin', this.paymentOrigin)
+        this.$store.dispatch('newPaymentOrigin', this.modalData)
           .then((message) => {
             this.loading = false
             this.$notify({

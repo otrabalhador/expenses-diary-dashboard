@@ -51,20 +51,35 @@ export default {
 
     display: flex;
     justify-content: center;
+    align-items: center;
 
   }
 
   .-wrapper-vertical {
+    display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
 
+  .-wrapper-modal {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    * {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  .-limit-size {
     width: $size-width;
     left: $left-width;
     position: relative;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
   }
 
   .-fixed-right {

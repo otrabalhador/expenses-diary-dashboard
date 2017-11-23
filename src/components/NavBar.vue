@@ -11,6 +11,10 @@
         <router-link v-if="isLoggedIn" class="link" :to="routeDetails.expenses.path">
           <li :class="{ active: isActive(routeDetails.expenses.name)}">Expenses</li>
         </router-link>
+        
+        <router-link v-if="isLoggedIn" class="link" :to="routeDetails.settings.path">
+          <li :class="{ active: isActive(routeDetails.settings.name)}">Settings</li>
+        </router-link>
 
       </ul>
 

@@ -38,12 +38,6 @@ export default {
     }
   ],
 
-  totalExpenses: 0,
-  expenses: null,
-
-  totalPaymentOrigins: 0,
-  paymentOrigins: null,
-
   // payment origin
   paymentOriginColumns: [
     {
@@ -57,6 +51,24 @@ export default {
     {
       label: 'Abbreviation',
       field: 'abbreviation'
+    }
+  ],
+
+  totalExpenses: 0,
+  expenses: null,
+
+  totalPaymentOrigins: 0,
+  paymentOrigins: null,
+
+  // category
+  categoryColumns: [
+    {
+      label: 'Name',
+      field: 'name'
+    },
+    {
+      label: 'Description',
+      field: 'description'
     }
   ],
 

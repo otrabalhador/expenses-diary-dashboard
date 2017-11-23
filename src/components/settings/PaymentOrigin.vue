@@ -1,5 +1,6 @@
 <template>
   <div id="payment-origin">
+
     <div class="-wrapper">
       <h1>Payment Origin</h1>
       <button class='-btn -btn-icon' @click="openModal">

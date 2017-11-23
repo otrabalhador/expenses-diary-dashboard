@@ -1,6 +1,7 @@
 <template>
   <div id="settings">
     <div class="-settings">
+
       <payment-origin class="payment-origin"></payment-origin>
       <category class="category"></category>
 
@@ -27,9 +28,8 @@
 
   .-settings {
     display: grid;
-    grid-template-areas: 'payment sep category';
-    grid-template-columns: 1fr 2vw 1fr;
     justify-items: center;
+    align-items: start;
 
     .payment-origin {
       grid-area: payment;
@@ -48,12 +48,13 @@
     }
 
     .sep {
+      grid-area: sep;
+      align-self: stretch;
+
+      height: auto;
       width: 100%;
       display: flex;
       justify-content: flex-start;
-
-      grid-area: sep;
-      height: auto;
 
       .border {
         height: 100%;
@@ -62,9 +63,21 @@
       }
       
     }
-
-
   }
 
+  @media screen and (min-width: 850px){
+    .-settings {
+      grid-template-areas: 'payment sep category';
+      grid-template-columns: 1fr 2vw 1fr;
+    }
+  }
+
+  @media screen and (max-width: 850px){
+    .-settings {
+      grid-template-areas: 
+        'payment'
+        'category';
+      }
+  }
 
 </style>

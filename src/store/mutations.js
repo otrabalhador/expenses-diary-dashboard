@@ -60,6 +60,21 @@ export default {
   fetchCategories: (state, categories) => {
     Vue.set(state, 'categories', categories.content)
     state.totalCategories = categories.total
+  },
+
+  newCategory: (state, category) => {
+    state.categories.push(category)
+  },
+
+  editCategory: (state, category) => {
+    let index = state.categories.map((el) => el.id).indexOf(category.id)
+    state.categories.splice(index, 1)
+    state.categories.splice(index, 0, category)
+  },
+
+  deleteCategory: (state, categoryId) => {
+    let index = state.categories.map((el) => el.id).indexOf(categoryId)
+    Vue.delete(state.categories, index)
   }
 
 }

@@ -8,6 +8,7 @@ const EXD_EXPENSE_URL = EXD_URL + 'expense/%id%'
 const EXD_PAYMENT_ORIGIN_URL = EXD_URL + 'payment-origin/%id%'
 const EXD_PAYMENT_ORIGINS_URL = EXD_URL + 'payment-origins'
 const EXD_CATEGORIES_URL = EXD_URL + 'categories'
+const EXD_CATEGORY_URL = EXD_URL + 'category/%id%'
 
 function singleResourceUrl (endpoint, expenseId) {
   return endpoint.replace(/%id%/g, expenseId)
@@ -214,5 +215,61 @@ export default {
           reject(err.response ? err.response.data.message : 'Server is indisponible')
         })
     })
+  },
+
+  newCategory: (context, category) => {
+    return new Promise((resolve, reject) => {
+      axios.post(EXD_CATEGORIES_URL, {
+        ...category
+      }, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('newCategory', category)
+          resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  },
+
+  editCategory: (context, category) => {
+    let categoryUrl = singleResourceUrl(EXD_CATEGORY_URL, category.id)
+
+    return new Promise((resolve, reject) => {
+      axios.patch(categoryUrl, {
+        name: category.name,
+        description: category.description,
+        abbreviation: category.abbreviation
+      }, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('editCategory', category)
+          resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
+  },
+
+  deleteCategory: (context, categoryId) => {
+    let categoryUrl = singleResourceUrl(EXD_CATEGORY_URL, categoryId)
+
+    return new Promise((resolve, reject) => {
+      axios.delete(categoryUrl, {
+        headers: store.getters.authHeaders
+      })
+        .then((response) => {
+          context.commit('deleteCategory', categoryId)
+          resolve(response.data.message)
+        })
+        .catch((err) => {
+          reject(err.response ? err.response.data.message : 'Server is indisponible')
+        })
+    })
   }
+
 }

@@ -2,27 +2,31 @@
   <div id="table-modal">
     <modal 
       :name="modal"
-      :width="modalWidth"
-      :height="modalHeight"
+      :width="width"
+      :height="height"
       @before-open="beforeOpen"
       >
 
       <loading v-show="loading" :msg="loading.msg"></loading>
 
-      <div class='-wrapper-vertical -limit-size' :style="{ 'max-width': modalWidth + 'px' }">
+      <div class='-wrapper-vertical -limit-size' :style="{ 'max-width': width }">
 
       <form>
 
         <template v-for="column in columns">
 
           <div class="form-group">
+
             <label :for="column['label']" class="control-label">
               {{column["label"]}}
             </label>
+
             <input 
               :id="column['label']"
               class="form-input"
-              v-model="modalData[column.field]">
+              v-model="modalData[column.field]"
+            >
+
           </div>
 
         </template>
@@ -34,11 +38,11 @@
 
       <div class="-wrapper-modal">
 
-        <button class='-btn -btn-red -btn-no-radius' @click="$modal.hide('payment-origin-form');">
+        <button class='-btn -btn-red -btn-no-radius' @click="$modal.hide(modal);">
           Close
         </button>
         
-        <button class='-btn -btn-no-radius' v-if="newPaymentOriginModal" @click="newPaymentOrigin()">
+        <button class='-btn -btn-no-radius' v-if="modalType === createType" @click="onCreate(modalData)">
           Create
         </button>
         
@@ -57,8 +61,19 @@
   export default {
     name: 'table-modal',
     props: {
+      height: {
+        type: Number,
+        default: 600
+      },
+      width: {
+        type: Number,
+        default: 400
+      },
       modal: {
         type: String
+      },
+      onCreate: {
+        type: Function
       },
       onEdit: {
         type: Function
@@ -69,14 +84,14 @@
     },
     data () {
       return {
-        modalHeight: 600,
-        modalWidth: 400,
-
         loading: false,
 
-        emptyPaymentOrigin: {},
+        emptyModalData: {},
         modalData: {},
-        newPaymentOriginModal: true
+
+        createType: 'CREATE',
+        editType: 'EDIT',
+        modalType: this.createType
       }
     },
     mounted () {
@@ -85,47 +100,21 @@
     methods: {
       beforeOpen (event) {
         if (event.params) {
-          this.newPaymentOriginModal = false
+          this.modalType = this.editType
           if (event.params.data) {
             this.modalData = event.params.data
           } else {
             this.modalData = this.emptyModalData
-            this.newPaymentOriginModal = true
+            this.modalType = this.createType
           }
         } else {
-          if (!this.newPaymentOriginModal) {
-            this.newPaymentOriginModal = true
+          if (!this.modalType) {
+            this.modalType = this.createType
             this.modalData = this.emptyModalData
           }
         }
-      },
-      newPaymentOrigin () {
-        this.loading = { msg: 'Creating new payment origin' }
-        this.$store.dispatch('newPaymentOrigin', this.modalData)
-          .then((message) => {
-            this.loading = false
-            this.$notify({
-              type: 'info',
-              group: 'info',
-              title: 'Payment Origin',
-              text: message
-            })
-            this.$modal.hide('payment-origin-form')
-          })
-          .catch((err) => {
-            this.loading = false
-            this.$notify({
-              type: 'error',
-              group: 'error',
-              title: 'Payment Origin',
-              text: err
-            })
-          })
       }
     },
     components: { Loading }
   }
 </script>
-
-<style scoped lang="scss">
-</style>

@@ -4,6 +4,7 @@
     <table-modal
       :columns="columns"
       :modal="modal"
+      :onCreate="onCreate"
       :onEdit="onEdit"
     ></table-modal>
 
@@ -68,6 +69,9 @@
       },
       modal: {
         type: String
+      },
+      onCreate: {
+        type: Function
       },
       onDelete: {
         type: Function

@@ -2,7 +2,7 @@
   <div id="payment-origin">
     <div class="-wrapper">
       <h1>Payment Origin</h1>
-      <button class='-btn -btn-icon' @click="newPaymentOrigin">
+      <button class='-btn -btn-icon' @click="openModal">
         <icon name="plus" scale="2"></icon>
       </button>
     </div>
@@ -13,8 +13,9 @@
       :data="paymentOrigins"
       :columns="paymentOriginColumns"
       :modal="paymentOriginModalName"
-      :onDelete="deletePaymentOrigin"
+      :onCreate="createPaymentOrigin"
       :onEdit="editPaymentOrigin"
+      :onDelete="deletePaymentOrigin"
     >
     </table-modal-component>
 
@@ -40,7 +41,7 @@
       }
     },
     methods: {
-      newPaymentOrigin () {
+      openModal () {
         this.$modal.show(this.paymentOriginModalName)
       },
       fetchPaymentOrigins () {
@@ -54,6 +55,29 @@
             this.$notify({
               type: 'error',
               group: 'error',
+              text: err
+            })
+          })
+      },
+      createPaymentOrigin (paymentOrigin) {
+        this.loading = { msg: 'Creating new payment origin' }
+        this.$store.dispatch('newPaymentOrigin', paymentOrigin)
+          .then((message) => {
+            this.loading = false
+            this.$notify({
+              type: 'info',
+              group: 'info',
+              title: 'Payment Origin',
+              text: message
+            })
+            this.$modal.hide('payment-origin-form')
+          })
+          .catch((err) => {
+            this.loading = false
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Payment Origin',
               text: err
             })
           })

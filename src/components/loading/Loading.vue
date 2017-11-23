@@ -1,6 +1,6 @@
 <template>
   <div id="loading">
-    <div class='-wrapper-vertical'>
+    <div class="-wrapper-vertical">
       <p class="loading">{{msg}}</p>
       <pulse-loader :size="size" :color="color"></pulse-loader>
     </div>
@@ -31,4 +31,5 @@
     color: #777777;
     font-weight: bold;
   }
+
 </style>

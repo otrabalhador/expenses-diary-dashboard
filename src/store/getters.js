@@ -16,7 +16,9 @@ export default {
 
   paymentOrigins: state => state.paymentOrigins,
   totalPaymentOrigins: state => state.totalPaymentOrigins,
+  paymentOriginColumns: state => state.paymentOriginColumns,
 
   categories: state => state.categories,
-  totalCategories: state => state.totalCategories
+  totalCategories: state => state.totalCategories,
+  categoryColumns: state => state.categoryColumns
 }

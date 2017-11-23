@@ -9,7 +9,7 @@
 
       <loading v-show="loading" :msg="loading.msg"></loading>
 
-      <div class='-wrapper-vertical' :style="{ 'max-width': modalWidth + 'px' }">
+      <div class='-wrapper-vertical -limit-size' :style="{ 'max-width': modalWidth + 'px' }">
 
       <form>
 
@@ -101,15 +101,15 @@
 
       <div class="-wrapper-modal">
 
-        <button class='-btn -btn-red' @click="$modal.hide('expense-form');">
+        <button class='-btn -btn-red -btn-no-radius' @click="$modal.hide('expense-form');">
           Close
         </button>
         
-        <button class='-btn' v-if="newExpenseModal" @click="newExpense()">
+        <button class='-btn -btn-no-radius' v-if="newExpenseModal" @click="newExpense()">
           Create
         </button>
         
-        <button class='-btn' v-else @click="editExpense()">
+        <button class='-btn -btn-no-radius' v-else @click="editExpense()">
           Edit
         </button>
 
@@ -176,8 +176,8 @@
       beforeOpen (event) {
         if (event.params) {
           this.newExpenseModal = false
-          if (event.params.expense) {
-            this.expense = event.params.expense
+          if (event.params.data) {
+            this.expense = event.params.data
           } else {
             this.expense = this.emptyExpense
             this.newExpenseModal = true
@@ -240,26 +240,3 @@
     components: { Loading }
   }
 </script>
-
-<style scoped lang="scss">
-
-
-  .-wrapper-modal {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-
-    display: flex;
-    justify-content: space-evenly;
-
-    * {
-      margin: 0;
-      width: 100%;
-    }
-  }
-
-  .-btn {
-    border-radius: 0;
-  }
-
-</style>

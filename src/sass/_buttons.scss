@@ -104,3 +104,7 @@ button:focus {
 }
 
 .-btn-icon:active { @include secondary-color-dark-outline; }
+
+.-btn-no-radius {
+  border-radius: 0;
+}

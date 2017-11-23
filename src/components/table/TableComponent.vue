@@ -1,8 +1,6 @@
 <template>
   <div id="table">
   
-    <loading v-if="loading" :msg="loading.msg"></loading>
-
     <div class="-wrap-table">
       
       <div class="-table" :class="columnClass">
@@ -22,7 +20,7 @@
 
         <div class='-table-cell -table-rbar-cell' :class="{'-table-cell-even': isEven(rowNumber)}">
           
-          <button class='-btn -btn-icon-sm -btn-blue' @click="editExpense(row)">
+          <button class='-btn -btn-icon-sm -btn-blue' @click="editRow(row)">
             <icon name="edit" scale="1"></icon>
           </button>      
 
@@ -41,7 +39,6 @@
 </template>
 
 <script>
-import Loading from '@/components/loading/Loading'
 export default {
   name: 'table',
   props: {
@@ -61,57 +58,36 @@ export default {
       default () {
         return null
       }
-    }
-  },
-  data () {
-    return {
-      loading: null
+    },
+    modal: {
+      type: String
+    },
+    onDelete: {
+      type: Function
     }
   },
   methods: {
-    isEven (value) {
-      return value % 2 !== 0
+    editRow (row) {
+      this.$modal.show(this.modal, { data: row })
     },
-    editExpense (expense) {
-      this.$modal.show('expense-form', { expense: expense })
-    },
-    confirmDeletion (expense) {
+    confirmDeletion (row) {
       this.$modal.show('dialog', {
-        title: 'Deleting expense...',
-        text: 'Are you sure you want to delete this expense?',
+        title: 'Deleting row...',
+        text: 'Are you sure you want to delete this row?',
         buttons: [
           { title: 'Cancel' },
           {
             title: 'Yes',
             handler: () => {
-              this.deleteExpense(expense)
+              this.onDelete(row)
               this.$modal.hide('dialog')
             }
           }
         ]
       })
     },
-    deleteExpense (expense) {
-      this.loading = { msg: 'Removing expense' }
-      this.$store.dispatch('deleteExpense', expense.id)
-        .then((message) => {
-          this.loading = false
-          this.$notify({
-            type: 'info',
-            group: 'info',
-            title: 'Expense',
-            text: message
-          })
-        })
-        .catch((err) => {
-          this.loading = false
-          this.$notify({
-            type: 'error',
-            group: 'error',
-            title: 'Expense',
-            text: err
-          })
-        })
+    isEven (value) {
+      return value % 2 !== 0
     },
     resolve_object (path, obj) {
       return path.split('.')
@@ -138,8 +114,7 @@ export default {
       let className = '-table--%colN%cols'
       return className.replace(/%colN%/g, colN)
     }
-  },
-  components: { Loading }
+  }
 }
 </script>
 
@@ -221,7 +196,6 @@ export default {
   .-table--11cols > .-table-cell  { width: (100% - $rbar-width)/11 }
   .-table--12cols > .-table-cell  { width: (100% - $rbar-width)/12 }
   .-table--13cols > .-table-cell  { width: (100% - $rbar-width)/13 }
-
 
 </style>
 

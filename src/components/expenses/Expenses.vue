@@ -9,17 +9,19 @@
       </button>
     </div>
     
-    <expense-table
+    <table-component
       :data="expenses"
       :columns="columns"
+      modal="expense-form"
+      :onDelete="deleteExpense"
     >
-    </expense-table>
+    </table-component>
 
   </div>
 </template>
 
 <script>
-  import ExpenseTable from '@/components/expenses/ExpenseTable'
+  import TableComponent from '@/components/table/TableComponent'
   import ExpenseModal from '@/components/expenses/ExpenseModal'
   import Loading from '@/components/loading/Loading'
   import { mapGetters } from 'vuex'
@@ -81,6 +83,28 @@
       },
       newExpense () {
         this.$modal.show('expense-form')
+      },
+      deleteExpense (expense) {
+        this.loading = { msg: 'Removing expense' }
+        this.$store.dispatch('deleteExpense', expense.id)
+          .then((message) => {
+            this.loading = false
+            this.$notify({
+              type: 'info',
+              group: 'info',
+              title: 'Expense',
+              text: message
+            })
+          })
+          .catch((err) => {
+            this.loading = false
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Expense',
+              text: err
+            })
+          })
       }
     },
     computed: mapGetters([
@@ -89,7 +113,7 @@
       'totalExpenses',
       'totalExpensesAmount'
     ]),
-    components: { ExpenseTable, ExpenseModal, Loading }
+    components: { TableComponent, ExpenseModal, Loading }
   }
 </script>
 

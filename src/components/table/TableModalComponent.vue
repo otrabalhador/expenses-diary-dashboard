@@ -138,7 +138,7 @@
   @import '../../sass/_variables.scss';
 
   $bw: 3px;  // border width
-  $rbar-width: 7%;
+  $rbar-width: 15%;
 
   .-wrap-table {
     display: flex;
@@ -180,6 +180,11 @@
 
       &.-table-rbar-cell {
         width: $rbar-width;
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: 2px;
       }
 
       &.-table-cell-even {

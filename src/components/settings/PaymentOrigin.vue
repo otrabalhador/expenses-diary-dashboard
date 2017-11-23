@@ -7,25 +7,23 @@
       </button>
     </div>
 
-    
     <loading v-show="loading" :msg="loading.msg"></loading>
 
-    <payment-origin-modal></payment-origin-modal>
-    <table-component
+    <table-modal-component
       :data="paymentOrigins"
       :columns="paymentOriginColumns"
       :modal="paymentOriginModalName"
       :onDelete="deletePaymentOrigin"
+      :onEdit="editPaymentOrigin"
     >
-    </table-component>
+    </table-modal-component>
 
   </div>
 </template>
 
 <script>
-  import TableComponent from '@/components/table/TableComponent'
   import Loading from '@/components/loading/Loading'
-  import PaymentOriginModal from './PaymentOriginModal'
+  import TableModalComponent from '@/components/table/TableModalComponent'
   import { mapGetters } from 'vuex'
 
   export default {
@@ -60,6 +58,29 @@
             })
           })
       },
+      editPaymentOrigin (paymentOrigin) {
+        this.loading = { msg: 'Editing payment origin' }
+        this.$store.dispatch('editPaymentOrigin', paymentOrigin)
+          .then((message) => {
+            this.loading = false
+            this.$notify({
+              type: 'info',
+              group: 'info',
+              title: 'Payment Origin',
+              text: message
+            })
+            this.$modal.hide('payment-origin-form')
+          })
+          .catch((err) => {
+            this.loading = false
+            this.$notify({
+              type: 'error',
+              group: 'error',
+              title: 'Payment Origin',
+              text: err
+            })
+          })
+      },
       deletePaymentOrigin (expense) {
         this.loading = { msg: 'Removing payment origin' }
         this.$store.dispatch('deletePaymentOrigin', expense.id)
@@ -84,7 +105,7 @@
       }
     },
     computed: mapGetters(['paymentOrigins', 'paymentOriginColumns']),
-    components: { TableComponent, PaymentOriginModal, Loading }
+    components: { TableModalComponent, Loading }
   }
 </script>
 

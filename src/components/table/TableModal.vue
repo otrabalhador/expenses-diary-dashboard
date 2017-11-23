@@ -1,7 +1,7 @@
 <template>
-  <div id="payment-origin-modal">
+  <div id="table-modal">
     <modal 
-      name="payment-origin-form"
+      :name="modal"
       :width="modalWidth"
       :height="modalHeight"
       @before-open="beforeOpen"
@@ -61,7 +61,7 @@
           Create
         </button>
         
-        <button class='-btn -btn-no-radius' v-else @click="editPaymentOrigin()">
+        <button class='-btn -btn-no-radius' v-else @click="onEdit(paymentOrigin)">
           Edit
         </button>
 
@@ -74,7 +74,15 @@
   import Loading from '@/components/loading/Loading'
 
   export default {
-    name: 'payment-origin-modal',
+    name: 'table-modal',
+    props: {
+      modal: {
+        type: String
+      },
+      onEdit: {
+        type: Function
+      }
+    },
     data () {
       return {
         modalHeight: 600,
